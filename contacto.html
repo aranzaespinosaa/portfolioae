@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aranza Espinosa | Contacto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: white;
+      color: black;
+    }
+
+    header {
+      background-color: white;
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-bar {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-bar a {
+      text-decoration: none;
+      color: black;
+      font-weight: 400;
+    }
+
+    .nav-bar a.activo {
+      font-weight: 900;
+    }
+
+    .logo {
+      height: 200px;
+    }
+
+    main {
+      display: flex;
+      justify-content: space-between;
+      padding: 2rem 4rem;
+      flex-wrap: wrap;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .nombre {
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .nombre span:last-child {
+      display: block;
+      margin-left: 50px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1rem;
+    }
+
+    .icono {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+	   .icono2 {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+    }
+
+    .redes {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 4rem;
+}
+
+    }
+
+    .derecha {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .video-circulo {
+      width: 300px;
+      height: 300px;
+      background-color: transparent;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+	  display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .video-circulo video {
+      width: auto;
+      height: 100%;
+      object-fit: cover;
+		min-height: 100%;
+		min-width: 100%;
+		position: absolute;
+		transform: translate(-50%, -50%);
+		top: 50%;
+		left: 50%;
+    }
+
+    .video-texto {
+      position: absolute;
+      right: -40px;
+      top: 50%;
+      transform: rotate(90deg) translateY(-50%);
+      transform-origin: right center;
+      font-weight: 600;
+      font-size: 1rem;
+      color: white;
+    }
+
+    @media (max-width: 800px) {
+      main {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .derecha {
+        margin-top: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="nav-bar">
+      <a href="index.html">INICIO</a>
+      <a href="proyectos.html">PROYECTOS</a>
+    </nav>
+    <img src="AE.jpg" alt="Logo AE" class="logo">
+    <a href="#" style="font-weight: 900; text-decoration: none; color: black;">CONTACTO</a>
+  </header>
+
+  <main>
+    <div class="info">
+      <div class="info-item">
+        <img src="Mail app icon.jpg" alt="Email" class="icono">
+        <span>aranzaespinosarios@gmail.com</span>
+      </div>
+      <div class="info-item">
+        <img src="descarga (6).jpg" alt="Ubicación" class="icono">
+        <span>Madrid</span>
+      </div>
+
+      <div class="redes">
+        <a href="https://www.instagram.com/aranza.sht" target="_blank">
+          <img src="5cc86c1b-28ef-4e91-9938-93545315adab.jpg" alt="Instagram" class="icono2">
+        </a>
+        <a href= "https://www.linkedin.com/in/aranzaespinosarios" target="_blank">
+          <img src="Download Linkedin logo vector, Linkedin symbol, Linkedin icon free vector.jpg" alt="LinkedIn" class="icono2">
+        </a>
+        <a href="https://www.youtube.com/@aranza_espinosa" target="_blank">
+          <img src="descarga (5).jpg" alt="YouTube" class="icono2">
+        </a>
+        <a href="https://www.behance.net/aranzaespinosa2" target="_blank">
+          <img src="descarga (4).jpg" alt="Behance" class="icono">
+        </a>
+      </div>
+    </div>
+
+    <div class="derecha">
+      <div class="nombre">
+        <span>ARANZA</span>
+        <span>ESPINOSA</span>
+      </div>
+      <div class="video-circulo">
+        <video autoplay loop muted>
+          <source src="Comp 1.mp4" type="video/mp4">
+          Tu navegador no soporta video HTML5.
+        </video>
+        <div class="video-texto">¡CONTÁCTAME!</div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
+
+
+

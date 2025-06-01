@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSHI | Proyecto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Barrio&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      cursor: url('stroke.png'), auto;
+    }
+
+    .hero {
+      width: 100%;
+      height: 120vh;
+      background-image: url('img/PORT_OSHI.jpg'); /* cambia por tu imagen */
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .hero h1 {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 10rem;
+      font-weight: 900;
+      margin: 0;
+		color: white;
+		
+    }
+ .back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem;
+      color: white;
+      text-decoration: none;
+      z-index: 10;
+	  }
+    .contenido {
+      padding: 2rem;
+      max-width: 800px;
+      margin-left: 2rem;
+      font-weight: 400;
+    }
+
+    .back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem;
+      color: white;
+      text-decoration: none;
+      z-index: 10;
+    }
+
+    section {
+      width: 100vw;
+      padding: 4rem 2rem;
+      box-sizing: border-box;
+    }
+
+    .concepto-section {
+      background: url('PRUEBA_FOTO_12.png') no-repeat center center/cover;
+      color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      padding-top: 3rem;
+      text-align: center;
+    }
+
+    .concepto-section h1 {
+      font-family: 'Barrio', cursive;
+      font-size: 5rem;
+      color: #00B6C9;
+      margin-bottom: 1rem;
+		text-align: left;
+      margin-top: 1rem;
+		margin-right: auto;
+    }
+
+    .concepto-textos {
+      display: flex;
+      justify-content:space-around;
+      gap: 1rem;
+      max-width: 1400px;
+      width: 100%;
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .concepto-textos p {
+      flex: 1;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+    }
+
+    .bloque-dos {
+      background: url('worlddddd (1).png') no-repeat center center/cover;
+      color: white;
+      width: 100vw;
+      height: 90vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 4rem;
+      box-sizing: border-box;
+    }
+
+    .bloque-dos .titulo {
+      font-family: 'Barrio', cursive;
+      font-size: 7rem;
+      align-self: flex-start;
+      color: white;
+    }
+
+    .bloque-dos .parrafo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 1.5rem;
+      align-self: flex-end;
+      max-width: 500px;
+      text-align: center;
+      color: white;
+    }
+
+    .imagenes-finales {
+      background: white;
+      color: #00B6C9;
+      padding: 4rem 2rem;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      text-align: center;
+    }
+
+    .imagenes-finales h2 {
+      font-family: 'Barrio', cursive;
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      color: #00B6C9;
+    }
+
+    .carousel {
+      width: 100vw;
+      height: 70vh;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      background: white;
+      pointer-events: none; /* ← AÑADIDO PARA PERMITIR HACER CLIC EN LOS ENLACES DE ABAJO */
+    }
+
+    .carousel img.active {
+      opacity: 1;
+    }
+
+    .final-section {
+      background: white;
+      text-align: center;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      padding: 4rem 2rem;
+    }
+
+    .final-section h1 {
+      font-family: 'Barrio', cursive;
+      color: #00B6C9;
+      font-size: 4rem;
+      margin-bottom: 2rem;
+    }
+
+    .final-section p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      color: black;
+      margin-bottom: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .final-icons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .final-icons img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .concepto-contenido {
+      display:flex;
+      align-items: left;
+      justify-content: space-between;
+      gap: 2rem;
+      max-width: 1400px;
+      width: 100%;
+      padding: 0 3rem;
+    }
+
+    .concepto-contenido p {
+      flex: 1.5;
+		text-align: left;
+    }
+
+  </style>
+</head>
+<body>
+
+ <div class="hero">
+	  <a href="proyectos.html" class="back-arrow">←</a>
+  </div>
+  <div class="contenido">
+    <p>
+      <strong>TÍTULO:</strong> OSHI<br>
+<strong>CREADO POR:</strong> ARANZA ESPINOSA <br>
+<strong>SOFTWARES:</strong> BLENDER, ADOBE AFTER EFFECTS, ADOBE PHOTOSHOP, <br> ELEVENLABS.IA, ADOBE PREMIERE <BR>
+<strong>AÑO:</strong> 2025
+    </p>
+  </div>
+  </div>
+
+
+
+
+
+  <section class="bloque-dos">
+    <p class="parrafo">Oshi es un cortometraje que representa, de forma simbólica y visualmente amable, a un niño con autismo frente a la 
+ansiedad y la sobrecarga sensorial. A través de un pequeño osito que habita un mundo blanco que poco a poco se 
+transforma en caos, la historia transmite la necesidad de 
+empatía, comprensión y aceptación hacia las personas con 
+autismo.</p>
+    <h2 class="titulo">HISTORIA</h2>
+  </section>
+
+  <section class="imagenes-finales">
+    <h2>IMÁGENES FINALES</h2>
+    <div class="carousel">
+      <img src="0053.png" class="active">
+      <img src="0041.png">
+      <img src="0521.png">
+      <img src="2229.png">
+      <img src="PRUEBA_FOTO_3.png">
+      <img src="PRUEBA_FOTO_12.png">
+      <img src="PRUEBA_FOTO_4.png">
+      <img src="PRUEBA_FOTO_13.png">
+    </div>
+  </section>
+
+  <section class="final-section">
+    <h1>GRACIAS</h1>
+    <p>OSHI surge como una propuesta artística que busca visibilizar de forma sensible la experiencia emocional de niños con autismo enfrentándose a momentos de ansiedad. A través de un lenguaje visual accesible y metafórico, el cortometraje aporta una herramienta de sensibilización que enseña una realidad compleja en imágenes emotivas.
+ El proyecto no sólo ofrece una representación respetuosa de la neurodivergencia, sino que también contribuye a ampliar los enfoques de comunicación y comprensión del autismo desde el arte, sirviendo como punto de partida para fomentar la empatía en audiencias tanto infantiles como adultas. El arte, en sus diversas expresiones, tiene la capacidad de comunicar experiencias que trascienden las barreras del lenguaje verbal. OSHI demuestra cómo la animación puede convertirse en un canal de sensibilización potente y accesible, permitiendo abordar temas complejos como el autismo y la ansiedad de manera emocionalmente significativa.
+ Partiendo de la idea de que “las personas con autismo no eligen su condición o su manera de relacionarse con su entorno; necesitamos trabajar para poder comprenderlos, y después cambiar lo que nosotros hacemos”, el proyecto se convierte en un ejemplo de cómo el arte puede actuar como un puente entre mundos diferentes, favoreciendo la inclusión y el entendimiento.
+La combinación de técnicas de animación 2D y 3D, junto con un diseño visual cuidado y una narrativa simbólica, refuerza la idea de que el arte no solo entretiene, sino que educa, visibiliza y genera empatía hacia realidades muchas veces incomprendidas o estigmatizadas.
+Este proyecto me ha permitido desarrollarme enormemente tanto a nivel personal como profesional. Me siento orgullosa del resultado, y estoy segura que Oshi podrá llegar a crear conciencia sobre el autsmo de una forma en la que los espectadores puedan conectar con su historia.</p>
+    <h2>CORTOMETRAJE</h2>
+    <div class="final-icons">
+      <a href="https://www.youtube.com/@aranza_espinosa" target="_blank"><img src="descarga (5).jpg" alt="YouTube"></a>
+      <a href="https://www.behance.net/aranzaespinosa2" target="_blank"><img src="descarga (4).jpg" alt="Behance"></a>
+    </div>
+  </section>
+
+  <script>
+    // Carrusel automático
+    let index = 0;
+    const images = document.querySelectorAll('.carousel img');
+
+    setInterval(() => {
+      images[index].classList.remove('active');
+      index = (index + 1) % images.length;
+      images[index].classList.add('active');
+    }, 5000);
+  </script>
+
+</body>
+</html>
+
