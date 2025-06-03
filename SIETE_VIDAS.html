@@ -80,11 +80,15 @@
       min-width: 100%;
     }
 
-    .carousel-item img,
-    .carousel-item video {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
+   .carousel-item img,
+.carousel-item video {
+  width: 100%;
+  height: auto;
+  max-height: 120vh; /* Nuevo: Limita la altura al 70% del alto de la ventana */
+  object-fit: contain; /* Para que la imagen no se recorte ni se deforme */
+  border-radius: 10px;
+}
+
     }
 
     .carousel-description {
