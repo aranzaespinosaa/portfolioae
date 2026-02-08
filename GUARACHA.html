@@ -36,35 +36,48 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            padding: 40px;
+            padding: 20px;
             overflow: hidden;
         }
 
-        /* Ajuste para que las imágenes de grid no se desborden */
+        /* Grids (DJ, Infrababy) */
         .grid-layout {
             display: grid;
             gap: 15px;
             width: 100%;
-            max-width: 1000px; /* Limita el ancho para mejor estética */
-            height: 70vh; /* Reduce la altura para que quepan etiquetas */
+            max-width: 1100px;
+            height: 70vh;
             z-index: 2;
         }
 
-        .grid-layout img {
+        /* Ajuste específico para Alexia para que se vean las 4 fotos */
+        .alexia-grid {
+            display: grid;
+            gap: 10px;
+            width: 100%;
+            max-width: 900px;
+            height: auto; /* Altura automática para evitar cortes */
+            max-height: 80vh;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            z-index: 2;
+        }
+
+        .grid-layout img, .alexia-grid img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Cambiado a contain para que se vea la foto completa */
-            background: #0a0a0a;
+            object-fit: contain;
+            background: transparent; /* Fondo transparente */
         }
 
-        /* Carrusel Ajustado */
+        /* Carrusel Ajustado sin fondo */
         .carousel-container {
             width: 100%;
-            max-width: 800px; /* Tamaño reducido y amable */
-            height: 60vh;
+            max-width: 850px; 
+            height: 65vh;
             position: relative;
             z-index: 2;
-            background: #050505;
+            background: transparent; /* Fondo transparente */
         }
 
         .carousel-container img {
@@ -73,19 +86,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Muestra toda la imagen sin recortar */
+            object-fit: contain;
             opacity: 0;
             transition: opacity 0.8s ease-in-out;
+            background: transparent;
         }
 
         .carousel-container img.active {
             opacity: 1;
         }
 
-        /* Imagen de Palestina ajustada */
         .full-img-contained {
             max-width: 90%;
-            max-height: 70vh;
+            max-height: 65vh;
             object-fit: contain;
             z-index: 1;
         }
@@ -99,9 +112,10 @@
 
         h1 {
             font-weight: 900;
-            font-size: clamp(3rem, 10vw, 5rem);
+            font-size: clamp(2.5rem, 8vw, 5rem);
             text-transform: uppercase;
             letter-spacing: -2px;
+            line-height: 0.9;
         }
 
         .label {
@@ -109,7 +123,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #aaa;
-            margin: 15px 0;
+            margin: 10px 0;
         }
 
         .side-text {
@@ -119,16 +133,14 @@
             transform: translateY(-50%) rotate(-90deg);
             font-size: 0.6rem;
             letter-spacing: 4px;
-            opacity: 0.5;
+            opacity: 0.6;
         }
 
-        /* Nueva sección final ancho total */
         .final-full-width {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
     </style>
 </head>
 <body>
@@ -149,21 +161,30 @@
             <img src="img/ARANZA_ESPINOSA_5.jpg" alt="DJ 2">
             <img src="img/ARANZA_ESPINOSA_6.jpg" alt="DJ 3">
         </div>
-        <p class="label">PIONEER DJ / INSTRUMENTO [cite: 6, 9]</p>
+        <p class="label">PIONEER DJ / INSTRUMENTO</p>
+    </section>
+
+    <section class="page">
+        <div class="side-text">INFRABABY</div>
+        <div class="grid-layout" style="grid-template-columns: repeat(3, 1fr);">
+            <img src="img/ARANZA_ESPINOSA_22.jpg">
+            <img src="img/ARANZA_ESPINOSA.jpg">
+            <img src="img/ARANZA_ESPINOSA_3.jpg">
+        </div>
     </section>
 
     <section class="page">
         <div class="side-text">ALEXIA</div>
-        <div class="grid-layout" style="grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr);">
+        <div class="alexia-grid">
             <img src="img/ARANZA_ESPINOSA_9.jpg">
             <img src="img/ARANZA_ESPINOSA_11.jpg">
             <img src="img/ARANZA_ESPINOSA_10.jpg">
             <img src="img/ARANZA_ESPINOSA_8.jpg">
         </div>
+        <p class="label" style="margin-top: 15px;">FOTOGRAFÍA ANALÓGICA</p>
     </section>
 
     <section class="page">
-        <div class="side-text">INFRABABY</div>
         <div class="carousel-container" id="carousel">
             <img src="img/ARANZA_ESPINOSA_16.jpg" class="active">
             <img src="img/ARANZA_ESPINOSA_21.jpg">
@@ -182,14 +203,13 @@
     <section class="page">
         <img src="img/ARANZA_ESPINOSA_20.jpg" class="full-img-contained">
         <div class="content">
-            <h2 style="font-size: 2.5rem; margin-top: 20px;">FREE PALESTINE</h2>
+            <h2 style="font-size: 2.2rem; margin-top: 20px;">FREE PALESTINE</h2>
             <p class="label">STOP GENOCIDE</p>
         </div>
     </section>
 
     <section class="page" style="padding: 0;">
         <img src="img/ARANZA_ESPINOSA_7.jpg" class="final-full-width">
-        <div class="side-text" style="color: white; opacity: 0.8;"></div>
     </section>
 
 </div>
