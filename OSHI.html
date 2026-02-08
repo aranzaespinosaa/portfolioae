@@ -10,201 +10,293 @@
       margin: 0;
       padding: 0;
       font-family: 'Montserrat', sans-serif;
-      overflow-x: hidden;
     }
 
     body {
       cursor: url('stroke.png'), auto;
     }
 
-    /* HERO SECTION */
     .hero {
       width: 100%;
-      height: 100vh; /* Ajustado para que no sea excesivo */
-      background-image: url('img/PORT_OSHI.jpg'); 
+      height: 120vh;
+      background-image: url('img/PORT_OSHI.jpg'); /* cambia por tu imagen */
       background-size: cover;
       background-position: center;
       position: relative;
+    }
+
+    .hero h1 {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 10rem;
+      font-weight: 900;
+      margin: 0;
+		color: white;
+		
+    }
+ .back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem;
+      color: white;
+      text-decoration: none;
+      z-index: 10;
+	  }
+    .contenido {
+      padding: 2rem;
+      max-width: 800px;
+      margin-left: 2rem;
+      font-weight: 400;
     }
 
     .back-arrow {
       position: absolute;
       top: 20px;
       left: 20px;
-      font-size: 2.5rem;
+      font-size: 2rem;
       color: white;
       text-decoration: none;
       z-index: 10;
-      font-weight: bold;
     }
 
-    .contenido {
+    section {
+      width: 100vw;
       padding: 4rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      font-weight: 400;
-      line-height: 1.6;
+      box-sizing: border-box;
     }
 
-    /* SECCIÓN HISTORIA (CORREGIDA) */
+    .concepto-section {
+      background: url('PRUEBA_FOTO_12.png') no-repeat center center/cover;
+      color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      padding-top: 3rem;
+      text-align: center;
+    }
+
+    .concepto-section h1 {
+      font-family: 'Barrio', cursive;
+      font-size: 5rem;
+      color: #00B6C9;
+      margin-bottom: 1rem;
+		text-align: left;
+      margin-top: 1rem;
+		margin-right: auto;
+    }
+
+    .concepto-textos {
+      display: flex;
+      justify-content:space-around;
+      gap: 1rem;
+      max-width: 1400px;
+      width: 100%;
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .concepto-textos p {
+      flex: 1;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+    }
+
     .bloque-dos {
       background: url('worlddddd (1).png') no-repeat center center/cover;
       color: white;
       width: 100vw;
-      min-height: 100vh;
-      display: grid;
-      /* Definimos rejilla: Título arriba, Texto abajo a la derecha */
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto 1fr;
+      height: 90vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       padding: 4rem;
       box-sizing: border-box;
     }
 
     .bloque-dos .titulo {
-      grid-column: 1 / 2;
-      grid-row: 1;
       font-family: 'Barrio', cursive;
       font-size: 7rem;
+      align-self:center;
       color: white;
-      margin: 0;
-      text-align: left;
     }
 
     .bloque-dos .parrafo {
-      grid-column: 2 / 3;
-      grid-row: 2;
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
-      font-size: 1.6rem;
-      max-width: 600px;
-      text-align: right; /* Alineado a la derecha como la referencia */
-      align-self: center;
-      justify-self: end;
+      font-size: 1.5rem;
+      align-self: flex-end;
+      max-width: 500px;
+      text-align: center;
       color: white;
-      line-height: 1.4;
     }
 
-    /* SECCIÓN IMÁGENES FINALES (MÁS GRANDES) */
     .imagenes-finales {
       background: white;
       color: #00B6C9;
-      padding: 4rem 0;
+      padding: 4rem 2rem;
       width: 100vw;
-      min-height: 100vh;
+      height: 100vh;
+      position: relative;
       text-align: center;
     }
 
     .imagenes-finales h2 {
       font-family: 'Barrio', cursive;
-      font-size: 4rem;
+      font-size: 3rem;
       margin-bottom: 2rem;
       color: #00B6C9;
     }
 
     .carousel {
-      width: 90vw; /* Más ancho */
-      height: 80vh; /* Más alto */
-      margin: 0 auto;
+      width: 100vw;
+      height: 70vh;
       overflow: hidden;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f0f0f0; /* Fondo sutil para que luzcan las fotos */
-      border-radius: 10px;
     }
 
     .carousel img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Cambiado a cover para que se vean grandes e imponentes */
+      object-fit: contain;
       position: absolute;
       opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-      pointer-events: none;
+      transition: opacity 1s ease-in-out;
+      background: white;
+      pointer-events: none; /* ← AÑADIDO PARA PERMITIR HACER CLIC EN LOS ENLACES DE ABAJO */
     }
 
     .carousel img.active {
       opacity: 1;
     }
 
-    /* SECCIÓN FINAL */
     .final-section {
       background: white;
       text-align: center;
-      padding: 6rem 2rem;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      padding: 4rem 2rem;
     }
 
     .final-section h1 {
       font-family: 'Barrio', cursive;
       color: #00B6C9;
-      font-size: 5rem;
+      font-size: 4rem;
       margin-bottom: 2rem;
     }
 
     .final-section p {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.1rem;
-      color: #333;
-      margin: 0 auto 3rem auto;
-      max-width: 900px;
-      line-height: 1.8;
+      font-size: 1rem;
+      color: black;
+      margin-bottom: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
 
     .final-icons {
       display: flex;
       justify-content: center;
-      gap: 3rem;
+      gap: 2rem;
+      margin-top: 1rem;
     }
 
     .final-icons img {
-      width: 60px;
-      height: 60px;
-      transition: transform 0.3s;
+      width: 40px;
+      height: 40px;
     }
 
-    .final-icons img:hover {
-      transform: scale(1.1);
+    .concepto-contenido {
+      display:flex;
+      align-items: left;
+      justify-content: space-between;
+      gap: 2rem;
+      max-width: 1400px;
+      width: 100%;
+      padding: 0 3rem;
     }
 
-    /* Responsivo para móviles */
-    @media (max-width: 768px) {
-      .bloque-dos {
-        display: flex;
-        flex-direction: column;
-        padding: 2rem;
-      }
-      .bloque-dos .titulo { font-size: 4rem; }
-      .bloque-dos .parrafo { font-size: 1.2rem; text-align: center; }
-      .carousel { height: 50vh; width: 95vw; }
+    .concepto-contenido p {
+      flex: 1.5;
+		text-align: left;
     }
+	  @media (max-width: 430px) {
+  .nav-bar {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 1rem;
+  }
+
+  .nav-bar li {
+    margin: 0.5rem;
+  }
+
+  .logo {
+    max-width: 60vw;
+    height: auto;
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  footer p {
+    width: 100%;
+  }
+}
+
+
   </style>
 </head>
 <body>
 
-  <div class="hero">
-    <a href="PROYECTOS.html" class="back-arrow">←</a>
+ <div class="hero">
+	  <a href="PROYECTOS.html" class="back-arrow">←</a>
   </div>
-
   <div class="contenido">
     <p>
-      <strong>SHORT FILM ANIMATION</strong> <br><br>
+        <strong> SHORT FILM ANIMATION</strong> <br> <br>
       <strong>TITLE:</strong> OSHI<br>
-      <strong>CREATED BY:</strong> ARANZA ESPINOSA <br>
-      <strong>SOFTWARES:</strong> BLENDER, ADOBE AFTER EFFECTS, ADOBE PHOTOSHOP, <br> ELEVENLABS.IA, ADOBE PREMIERE <br>
-      <strong>YEAR:</strong> 2025
+<strong>CREATED BY:</strong> ARANZA ESPINOSA <br>
+<strong>SOFTWARES:</strong> BLENDER, ADOBE AFTER EFFECTS, ADOBE PHOTOSHOP, <br> ELEVENLABS.IA, ADOBE PREMIERE <BR>
+<strong>YEAR:</strong> 2025
     </p>
   </div>
+  </div>
+
+
+
+
 
   <section class="bloque-dos">
-    <h2 class="titulo">HISTORIA</h2>
-    <p class="parrafo">
-      OSHI is an experimental and symbolic short film that portrays the experience of a child with autism facing anxiety and sensory overload. Through a small bear living in a white world that gradually transforms into chaos, the story conveys the vital need for empathy and acceptance.
-    </p>
+    <p class="parrafo">OSHI is an experimental and symbolic short film that portrays the experience of a child with autism facing anxiety and sensory overload. Through a small bear living in a white world that gradually transforms into chaos, the story conveys the vital need for empathy and acceptance.
+</p>
+    <h2 class="titulo">NARRATIVE</h2>
   </section>
 
   <section class="imagenes-finales">
-    <h2>IMÁGENES FINALES</h2>
+    <h2>FINAL IMAGES</h2>
     <div class="carousel">
       <img src="0053.png" class="active">
       <img src="0041.png">
@@ -218,29 +310,28 @@
   </section>
 
   <section class="final-section">
-    <h1>GRACIAS</h1>
-    <p>
-      As the sole creator of the project, I was responsible for the entire creative process. I developed the original story and designed the storyboard, establishing a unique aesthetic inspired by anime. To bring this vision to life, I combined 3D and 2D animation techniques, crafting a visual language that balances technical precision with deep emotional resonance.
-    </p>
-    <h2>CORTOMETRAJE</h2>
+    <h1>DEVELOPMENT</h1>
+    <p>As the sole creator of the project, I was responsible for the entire creative process. I developed the original story and designed the storyboard, establishing a unique aesthetic inspired by anime. To bring this vision to life, I combined 3D and 2D animation techniques, crafting a visual language that balances technical precision with deep emotional resonance.
+OSHI in essence, is an invitation to see th world with a new perspective.</p>
+    <h2>SHORTFILM</h2>
     <div class="final-icons">
       <a href="https://youtu.be/p4IUJmvuvUM" target="_blank"><img src="descarga (5).jpg" alt="YouTube"></a>
-      <a href="https://www.behance.net/gallery/227221007/OSHI" target="_blank"><img src="descarga (4).jpg" alt="Behance"></a>
+      <a href="https://www.behance.net/gallery/227221007/OSHI"target="_blank"><img src="descarga (4).jpg" alt="Behance"></a>
     </div>
   </section>
 
   <script>
+    // Carrusel automático
     let index = 0;
     const images = document.querySelectorAll('.carousel img');
 
-    function nextImage() {
+    setInterval(() => {
       images[index].classList.remove('active');
       index = (index + 1) % images.length;
       images[index].classList.add('active');
-    }
-
-    setInterval(nextImage, 4000); // Cambia cada 4 segundos
+    }, 5000);
   </script>
 
 </body>
 </html>
+
