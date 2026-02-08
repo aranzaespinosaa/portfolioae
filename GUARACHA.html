@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GURACHA</title>
     <style>
-        /* Importación de tipografías similares al PDF */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
         * {
@@ -16,20 +15,18 @@
 
         body, html {
             height: 100%;
-            background-color: #000; /* Fondo negro como el PDF */
+            background-color: #000;
             font-family: 'Inter', sans-serif;
             color: white;
             overflow-x: hidden;
         }
 
-        /* Contenedor principal para el scroll de página completa */
         .container {
             height: 100vh;
-            scroll-snap-type: y mandatory; /* Hace que el scroll se "pegue" a cada sección */
+            scroll-snap-type: y mandatory;
             overflow-y: scroll;
         }
 
-        /* Estilo general para cada página del PDF */
         .page {
             height: 100vh;
             width: 100vw;
@@ -43,18 +40,17 @@
             overflow: hidden;
         }
 
-        /* Estilo para las imágenes que ocupan toda la página */
+        /* Imágenes que cubren todo el fondo */
         .full-img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* O 'contain' si prefieres ver la foto completa sin recortar */
+            object-fit: cover;
             position: absolute;
             top: 0;
             left: 0;
             z-index: 1;
         }
 
-        /* Contenedor de texto superpuesto */
         .content {
             position: relative;
             z-index: 2;
@@ -63,7 +59,6 @@
             max-width: 1200px;
         }
 
-        /* Estilos específicos de tipografía basados en tu PDF */
         h1 {
             font-weight: 900;
             font-size: 5rem;
@@ -80,13 +75,13 @@
             color: #ccc;
         }
 
-        /* Grid para la página 2 (DJ) y página 4 (Alexia) */
+        /* Grids adaptables */
         .grid-layout {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             width: 100%;
-            height: 80vh;
+            height: 85vh;
+            z-index: 2;
         }
 
         .grid-layout img {
@@ -95,7 +90,13 @@
             object-fit: cover;
         }
 
-        /* Etiquetas laterales como "SABINE" */
+        /* Específico para 12 imágenes */
+        .grid-12 {
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+        }
+
+        /* Texto lateral estilo PDF */
         .side-text {
             position: absolute;
             left: 20px;
@@ -104,8 +105,19 @@
             font-size: 0.7rem;
             letter-spacing: 3px;
             opacity: 0.6;
+            z-index: 3;
         }
 
+        /* Footer de ancho total */
+        .full-width-footer {
+            width: 100%;
+            height: 20vh;
+            background-color: #111; /* Color oscuro para diferenciar */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: auto;
+        }
     </style>
 </head>
 <body>
@@ -115,8 +127,8 @@
     <section class="page">
         <div class="content">
             <p class="label">La</p>
-            <h1>Guaracha</h1>
-            <p class="label">LATINOAMÉRICA & MADRID/ 2025</p>
+            <h1>Guaracha</h1> 
+            <p class="label">LATINOAMÉRICA & MADRID / 2025</p> 
         </div>
     </section>
 
@@ -126,33 +138,49 @@
             <img src="img/ARANZA_ESPINOSA_5.jpg" alt="DJ 2">
             <img src="img/ARANZA_ESPINOSA_6.jpg" alt="DJ 3">
         </div>
-        <p class="label" style="margin-top: 20px;">PIONEER DJ / INSTRUMENTO</p>
+        <p class="label" style="margin-top: 20px;">PIONEER DJ / INSTRUMENTO</p> 
     </section>
 
     <section class="page">
-        <div class="grid-layout">
+        <div class="side-text">INFRABABY</div> 
+        <div class="grid-layout" style="grid-template-columns: repeat(3, 1fr);">
+            <img src="img/ARANZA_ESPINOSA_22.jpg">
+            <img src="img/ARANZA_ESPINOSA.jpg">
+            <img src="img/ARANZA_ESPINOSA_3.jpg">
+        </div>
+    </section>
+
+    <section class="page">
+        <div class="side-text">ALEXIA</div> 
+        <div class="grid-layout" style="grid-template-columns: repeat(2, 1fr);">
             <img src="img/ARANZA_ESPINOSA_9.jpg">
             <img src="img/ARANZA_ESPINOSA_11.jpg">
             <img src="img/ARANZA_ESPINOSA_10.jpg">
             <img src="img/ARANZA_ESPINOSA_8.jpg">
         </div>
-        <div class="side-text">ALEXIA</div>
+    </section>
+
+    <section class="page">
+        <div class="grid-layout grid-12">
+            <img src="img/ARANZA_ESPINOSA_16.jpg"><img src="img/ARANZA_ESPINOSA_21.jpg">
+            <img src="img/ARANZA_ESPINOSA_15.jpg"><img src="img/ARANZA_ESPINOSA_23.jpg">
+            <img src="img/ARANZA_ESPINOSA_14.jpg"><img src="img/ARANZA_ESPINOSA_13.jpg"
+            <img src="img/ARANZA_ESPINOSA_17.jpg"><img src="img/ARANZA_ESPINOSA_24.jpg">
+            <img src="img/ARANZA_ESPINOSA_18.jpg"><img 
+            <img src="img/ARANZA_ESPINOSA_19.jpg"><img 
+        </div>
+        <div class="full-width-footer">
+            <p class="label">PROYECTO COMPLETO 2025</p>
+            <img src="img/ARANZA_ESPINOSA_7.jpg"><img
+        </div>
     </section>
 
     <section class="page">
         <img src="img/ARANZA_ESPINOSA_20.jpg" class="full-img">
-        <div class="content" style="text-align: left; top: 100px;">
+        <div class="content" style="text-align: left; padding-left: 10%;">
             <h2 style="font-size: 3rem;">FREE<br>PALESTINE</h2>
-            <p class="label">STOP GENOCIDIO</p>
+            <p class="label">STOP GENOCIDE</p>
         </div>
-    </section>
-
-    <section class="page">
-        <div class="grid-layout">
-            <img src="img/ARANZA_ESPINOSA_7.jpg">
-            <img src="img/ARANZA_ESPINOSA_15.jpg">
-        </div>
-        <div class="side-text">EL SOL / 105</div>
     </section>
 
 </div>
