@@ -17,10 +17,11 @@
       cursor: url('stroke.png'), auto;
     }
 
+    /* HERO SECTION */
     .hero {
       width: 100%;
-      height: 100vh;
-      background-image: url('img/PORT_OSHI.jpg');
+      height: 100vh; /* Ajustado para que no sea excesivo */
+      background-image: url('img/PORT_OSHI.jpg'); 
       background-size: cover;
       background-position: center;
       position: relative;
@@ -33,51 +34,60 @@
       font-size: 2.5rem;
       color: white;
       text-decoration: none;
-      z-index: 100;
+      z-index: 10;
+      font-weight: bold;
     }
 
     .contenido {
       padding: 4rem 2rem;
-      max-width: 800px;
-      margin-left: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      font-weight: 400;
+      line-height: 1.6;
     }
 
-    /* SECCIÓN HISTORIA CORREGIDA */
+    /* SECCIÓN HISTORIA (CORREGIDA) */
     .bloque-dos {
       background: url('worlddddd (1).png') no-repeat center center/cover;
       color: white;
       width: 100vw;
-      height: 100vh; /* Aumentado para dar aire */
-      display: flex;
-      flex-direction: column;
+      min-height: 100vh;
+      display: grid;
+      /* Definimos rejilla: Título arriba, Texto abajo a la derecha */
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto 1fr;
       padding: 4rem;
       box-sizing: border-box;
     }
 
     .bloque-dos .titulo {
+      grid-column: 1 / 2;
+      grid-row: 1;
       font-family: 'Barrio', cursive;
       font-size: 7rem;
       color: white;
       margin: 0;
-      align-self: flex-start; /* Título arriba a la izquierda */
+      text-align: left;
     }
 
     .bloque-dos .parrafo {
+      grid-column: 2 / 3;
+      grid-row: 2;
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
       font-size: 1.6rem;
       max-width: 600px;
-      line-height: 1.4;
-      align-self: flex-end; /* Texto a la derecha */
-      margin-top: auto;
-      margin-bottom: auto;
-      text-align: right; /* Alineado a la derecha para contraste */
+      text-align: right; /* Alineado a la derecha como la referencia */
+      align-self: center;
+      justify-self: end;
       color: white;
+      line-height: 1.4;
     }
 
-    /* SECCIÓN IMÁGENES FINALES MÁS GRANDES */
+    /* SECCIÓN IMÁGENES FINALES (MÁS GRANDES) */
     .imagenes-finales {
       background: white;
+      color: #00B6C9;
       padding: 4rem 0;
       width: 100vw;
       min-height: 100vh;
@@ -92,32 +102,37 @@
     }
 
     .carousel {
-      width: 100vw;
-      height: 85vh; /* Mucho más alto */
+      width: 90vw; /* Más ancho */
+      height: 80vh; /* Más alto */
+      margin: 0 auto;
       overflow: hidden;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f0f0; /* Fondo sutil para que luzcan las fotos */
+      border-radius: 10px;
     }
 
     .carousel img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Cambiado a cover para que llene todo el espacio */
+      object-fit: cover; /* Cambiado a cover para que se vean grandes e imponentes */
       position: absolute;
-      left: 0;
-      top: 0;
       opacity: 0;
-      transition: opacity 1s ease-in-out;
+      transition: opacity 0.8s ease-in-out;
+      pointer-events: none;
     }
 
     .carousel img.active {
       opacity: 1;
     }
 
-    /* SECCIÓN GRACIAS */
+    /* SECCIÓN FINAL */
     .final-section {
       background: white;
-      padding: 6rem 2rem;
       text-align: center;
+      padding: 6rem 2rem;
     }
 
     .final-section h1 {
@@ -128,10 +143,12 @@
     }
 
     .final-section p {
+      font-family: 'Montserrat', sans-serif;
       font-size: 1.1rem;
+      color: #333;
+      margin: 0 auto 3rem auto;
       max-width: 900px;
-      margin: 0 auto 4rem auto;
-      line-height: 1.6;
+      line-height: 1.8;
     }
 
     .final-icons {
@@ -141,7 +158,8 @@
     }
 
     .final-icons img {
-      width: 50px;
+      width: 60px;
+      height: 60px;
       transition: transform 0.3s;
     }
 
@@ -149,10 +167,16 @@
       transform: scale(1.1);
     }
 
+    /* Responsivo para móviles */
     @media (max-width: 768px) {
+      .bloque-dos {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+      }
       .bloque-dos .titulo { font-size: 4rem; }
-      .bloque-dos .parrafo { font-size: 1.2rem; align-self: center; text-align: center; }
-      .carousel { height: 60vh; }
+      .bloque-dos .parrafo { font-size: 1.2rem; text-align: center; }
+      .carousel { height: 50vh; width: 95vw; }
     }
   </style>
 </head>
@@ -167,7 +191,7 @@
       <strong>SHORT FILM ANIMATION</strong> <br><br>
       <strong>TITLE:</strong> OSHI<br>
       <strong>CREATED BY:</strong> ARANZA ESPINOSA <br>
-      <strong>SOFTWARES:</strong> BLENDER, AFTER EFFECTS, PHOTOSHOP, ELEVENLABS, PREMIERE <br>
+      <strong>SOFTWARES:</strong> BLENDER, ADOBE AFTER EFFECTS, ADOBE PHOTOSHOP, <br> ELEVENLABS.IA, ADOBE PREMIERE <br>
       <strong>YEAR:</strong> 2025
     </p>
   </div>
@@ -175,7 +199,7 @@
   <section class="bloque-dos">
     <h2 class="titulo">HISTORIA</h2>
     <p class="parrafo">
-      OSHI es un cortometraje experimental y simbólico que representa la vivencia de un niño con autismo frente a la ansiedad y la sobrecarga sensorial. A través de un pequeño osito que habita un mundo blanco que se transforma en caos, la historia transmite la necesidad de empatía y aceptación.
+      OSHI is an experimental and symbolic short film that portrays the experience of a child with autism facing anxiety and sensory overload. Through a small bear living in a white world that gradually transforms into chaos, the story conveys the vital need for empathy and acceptance.
     </p>
   </section>
 
@@ -195,7 +219,9 @@
 
   <section class="final-section">
     <h1>GRACIAS</h1>
-    <p>OSHI es una propuesta artística que busca visibilizar la experiencia emocional de niños con autismo... (resto del texto igual)</p>
+    <p>
+      As the sole creator of the project, I was responsible for the entire creative process. I developed the original story and designed the storyboard, establishing a unique aesthetic inspired by anime. To bring this vision to life, I combined 3D and 2D animation techniques, crafting a visual language that balances technical precision with deep emotional resonance.
+    </p>
     <h2>CORTOMETRAJE</h2>
     <div class="final-icons">
       <a href="https://youtu.be/p4IUJmvuvUM" target="_blank"><img src="descarga (5).jpg" alt="YouTube"></a>
@@ -207,13 +233,14 @@
     let index = 0;
     const images = document.querySelectorAll('.carousel img');
 
-    setInterval(() => {
+    function nextImage() {
       images[index].classList.remove('active');
       index = (index + 1) % images.length;
       images[index].classList.add('active');
-    }, 4000);
+    }
+
+    setInterval(nextImage, 4000); // Cambia cada 4 segundos
   </script>
 
 </body>
 </html>
-
