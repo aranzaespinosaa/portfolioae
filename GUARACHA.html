@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GURACHA</title>
+    <style>
+        /* Importación de tipografías similares al PDF */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            background-color: #000; /* Fondo negro como el PDF */
+            font-family: 'Inter', sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Contenedor principal para el scroll de página completa */
+        .container {
+            height: 100vh;
+            scroll-snap-type: y mandatory; /* Hace que el scroll se "pegue" a cada sección */
+            overflow-y: scroll;
+        }
+
+        /* Estilo general para cada página del PDF */
+        .page {
+            height: 100vh;
+            width: 100vw;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* Estilo para las imágenes que ocupan toda la página */
+        .full-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* O 'contain' si prefieres ver la foto completa sin recortar */
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* Contenedor de texto superpuesto */
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* Estilos específicos de tipografía basados en tu PDF */
+        h1 {
+            font-weight: 900;
+            font-size: 5rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            line-height: 0.9;
+        }
+
+        .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+
+        /* Grid para la página 2 (DJ) y página 4 (Alexia) */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+            height: 80vh;
+        }
+
+        .grid-layout img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Etiquetas laterales como "SABINE" */
+        .side-text {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            opacity: 0.6;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <section class="page">
+        <div class="content">
+            <p class="label">La</p>
+            <h1>Guaracha</h1>
+            <p class="label">LATINOAMÉRICA & MADRID/ 2025</p>
+        </div>
+    </section>
+
+    <section class="page">
+        <div class="grid-layout" style="grid-template-columns: repeat(3, 1fr);">
+            <img src="img/ARANZA_ESPINOSA_4.jpg" alt="DJ 1">
+            <img src="img/ARANZA_ESPINOSA_5.jpg" alt="DJ 2">
+            <img src="img/ARANZA_ESPINOSA_6.jpg" alt="DJ 3">
+        </div>
+        <p class="label" style="margin-top: 20px;">PIONEER DJ / INSTRUMENTO</p>
+    </section>
+
+    <section class="page">
+        <div class="grid-layout">
+            <img src="img/ARANZA_ESPINOSA_9.jpg">
+            <img src="img/ARANZA_ESPINOSA_11.jpg">
+            <img src="img/ARANZA_ESPINOSA_10.jpg">
+            <img src="img/ARANZA_ESPINOSA_8.jpg">
+        </div>
+        <div class="side-text">ALEXIA</div>
+    </section>
+
+    <section class="page">
+        <img src="img/ARANZA_ESPINOSA_20.jpg" class="full-img">
+        <div class="content" style="text-align: left; top: 100px;">
+            <h2 style="font-size: 3rem;">FREE<br>PALESTINE</h2>
+            <p class="label">STOP GENOCIDIO</p>
+        </div>
+    </section>
+
+    <section class="page">
+        <div class="grid-layout">
+            <img src="img/ARANZA_ESPINOSA_7.jpg">
+            <img src="img/ARANZA_ESPINOSA_15.jpg">
+        </div>
+        <div class="side-text">EL SOL / 105</div>
+    </section>
+
+</div>
+
+</body>
+</html>
