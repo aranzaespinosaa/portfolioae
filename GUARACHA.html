@@ -36,64 +36,35 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            padding: 20px;
+            padding: 40px;
             overflow: hidden;
         }
 
-        .full-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-
-        .content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        h1 {
-            font-weight: 900;
-            font-size: 5rem;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            line-height: 0.9;
-        }
-
-        .label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            color: #ccc;
-        }
-
+        /* Ajuste para que las imágenes de grid no se desborden */
         .grid-layout {
             display: grid;
-            gap: 10px;
+            gap: 15px;
             width: 100%;
-            height: 85vh;
+            max-width: 1000px; /* Limita el ancho para mejor estética */
+            height: 70vh; /* Reduce la altura para que quepan etiquetas */
             z-index: 2;
         }
 
         .grid-layout img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Cambiado a contain para que se vea la foto completa */
+            background: #0a0a0a;
         }
 
-        /* --- ESTILOS DEL CARRUSEL --- */
+        /* Carrusel Ajustado */
         .carousel-container {
             width: 100%;
-            height: 70vh;
+            max-width: 800px; /* Tamaño reducido y amable */
+            height: 60vh;
             position: relative;
             z-index: 2;
+            background: #050505;
         }
 
         .carousel-container img {
@@ -102,35 +73,62 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Muestra toda la imagen sin recortar */
             opacity: 0;
-            transition: opacity 1s ease-in-out; /* Transición suave */
+            transition: opacity 0.8s ease-in-out;
         }
 
         .carousel-container img.active {
             opacity: 1;
         }
 
-        .side-text {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%) rotate(-90deg);
-            font-size: 0.7rem;
-            letter-spacing: 3px;
-            opacity: 0.6;
-            z-index: 3;
+        /* Imagen de Palestina ajustada */
+        .full-img-contained {
+            max-width: 90%;
+            max-height: 70vh;
+            object-fit: contain;
+            z-index: 1;
         }
 
-        .full-width-footer {
-            width: 100%;
-            height: 15vh;
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .content {
+            position: relative;
             z-index: 2;
+            text-align: center;
+            width: 100%;
         }
+
+        h1 {
+            font-weight: 900;
+            font-size: clamp(3rem, 10vw, 5rem);
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #aaa;
+            margin: 15px 0;
+        }
+
+        .side-text {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 0.6rem;
+            letter-spacing: 4px;
+            opacity: 0.5;
+        }
+
+        /* Nueva sección final ancho total */
+        .final-full-width {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
     </style>
 </head>
 <body>
@@ -140,8 +138,8 @@
     <section class="page">
         <div class="content">
             <p class="label">La</p>
-            <h1>Guaracha</h1> 
-            <p class="label">LATINOAMÉRICA & MADRID / 2025</p> 
+            <h1>Guaracha</h1>
+            <p class="label">LATINOAMÉRICA & MADRID / 2025</p>
         </div>
     </section>
 
@@ -151,22 +149,12 @@
             <img src="img/ARANZA_ESPINOSA_5.jpg" alt="DJ 2">
             <img src="img/ARANZA_ESPINOSA_6.jpg" alt="DJ 3">
         </div>
-        <p class="label" style="margin-top: 20px;">PIONEER DJ / INSTRUMENTO</p> 
+        <p class="label">PIONEER DJ / INSTRUMENTO [cite: 6, 9]</p>
     </section>
 
     <section class="page">
-        <div class="side-text">INFRABABY</div> 
-
-        <div class="grid-layout" style="grid-template-columns: repeat(3, 1fr);">
-            <img src="img/ARANZA_ESPINOSA_22.jpg">
-            <img src="img/ARANZA_ESPINOSA.jpg">
-            <img src="img/ARANZA_ESPINOSA_3.jpg">
-        </div>
-    </section>
-
-    <section class="page">
-        <div class="side-text">ALEXIA</div> 
-        <div class="grid-layout" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="side-text">ALEXIA</div>
+        <div class="grid-layout" style="grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr);">
             <img src="img/ARANZA_ESPINOSA_9.jpg">
             <img src="img/ARANZA_ESPINOSA_11.jpg">
             <img src="img/ARANZA_ESPINOSA_10.jpg">
@@ -175,6 +163,7 @@
     </section>
 
     <section class="page">
+        <div class="side-text">INFRABABY</div>
         <div class="carousel-container" id="carousel">
             <img src="img/ARANZA_ESPINOSA_16.jpg" class="active">
             <img src="img/ARANZA_ESPINOSA_21.jpg">
@@ -186,40 +175,35 @@
             <img src="img/ARANZA_ESPINOSA_24.jpg">
             <img src="img/ARANZA_ESPINOSA_18.jpg">
             <img src="img/ARANZA_ESPINOSA_19.jpg">
-            <img src="img/ARANZA_ESPINOSA_7.jpg">
         </div>
-        <div class="full-width-footer">
-            <p class="label">PROYECTO COMPLETO 2025</p>
-        </div>
+        <p class="label">PROYECTO COMPLETO 2025</p>
     </section>
 
     <section class="page">
-        <img src="img/ARANZA_ESPINOSA_20.jpg" class="full-img">
-        <div class="content" style="text-align: left; padding-left: 10%;">
-            <h2 style="font-size: 3rem;">FREE<br>PALESTINE</h2>
+        <img src="img/ARANZA_ESPINOSA_20.jpg" class="full-img-contained">
+        <div class="content">
+            <h2 style="font-size: 2.5rem; margin-top: 20px;">FREE PALESTINE</h2>
             <p class="label">STOP GENOCIDE</p>
         </div>
+    </section>
+
+    <section class="page" style="padding: 0;">
+        <img src="img/ARANZA_ESPINOSA_7.jpg" class="final-full-width">
+        <div class="side-text" style="color: white; opacity: 0.8;"></div>
     </section>
 
 </div>
 
 <script>
-    // Lógica del carrusel
     const images = document.querySelectorAll('#carousel img');
     let currentIndex = 0;
 
     function nextImage() {
-        // Quitar clase activa de la imagen actual
         images[currentIndex].classList.remove('active');
-        
-        // Calcular siguiente índice
         currentIndex = (currentIndex + 1) % images.length;
-        
-        // Añadir clase activa a la nueva imagen
         images[currentIndex].classList.add('active');
     }
 
-    // Configurar el intervalo a 5000ms (5 segundos)
     setInterval(nextImage, 5000);
 </script>
 
