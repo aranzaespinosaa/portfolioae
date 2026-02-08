@@ -10,6 +10,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
     }
 
     body {
@@ -18,146 +19,89 @@
 
     .hero {
       width: 100%;
-      height: 120vh;
-      background-image: url('img/PORT_OSHI.jpg'); /* cambia por tu imagen */
+      height: 100vh;
+      background-image: url('img/PORT_OSHI.jpg'); 
       background-size: cover;
       background-position: center;
       position: relative;
-    }
-
-    .hero h1 {
-      position: absolute;
-      bottom: 20px;
-      width: 100%;
-      text-align: center;
-      font-size: 10rem;
-      font-weight: 900;
-      margin: 0;
-		color: white;
-		
-    }
- .back-arrow {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 2rem;
-      color: white;
-      text-decoration: none;
-      z-index: 10;
-	  }
-    .contenido {
-      padding: 2rem;
-      max-width: 800px;
-      margin-left: 2rem;
-      font-weight: 400;
     }
 
     .back-arrow {
       position: absolute;
       top: 20px;
       left: 20px;
-      font-size: 2rem;
+      font-size: 2.5rem;
       color: white;
       text-decoration: none;
       z-index: 10;
     }
 
-    section {
-      width: 100vw;
+    .contenido {
       padding: 4rem 2rem;
-      box-sizing: border-box;
-    }
-
-    .concepto-section {
-      background: url('PRUEBA_FOTO_12.png') no-repeat center center/cover;
-      color: black;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      width: 100vw;
-      height: 100vh;
-      position: relative;
-      padding-top: 3rem;
-      text-align: center;
-    }
-
-    .concepto-section h1 {
-      font-family: 'Barrio', cursive;
-      font-size: 5rem;
-      color: #00B6C9;
-      margin-bottom: 1rem;
-		text-align: left;
-      margin-top: 1rem;
-		margin-right: auto;
-    }
-
-    .concepto-textos {
-      display: flex;
-      justify-content:space-around;
-      gap: 1rem;
-      max-width: 1400px;
-      width: 100%;
-      padding: 1rem;
-      text-align: left;
-    }
-
-    .concepto-textos p {
-      flex: 1;
-      font-family: 'Montserrat', sans-serif;
+      max-width: 1200px;
+      margin-left: 2rem;
       font-weight: 400;
     }
 
+    /* SECCIÓN NARRATIVE (BLOQUE DOS CORREGIDO) */
     .bloque-dos {
       background: url('worlddddd (1).png') no-repeat center center/cover;
       color: white;
       width: 100vw;
-      height: 90vh;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 4rem;
+      min-height: 100vh;
+      display: grid;
+      /* Título arriba izquierda, texto centro derecha */
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto 1fr;
+      padding: 5rem;
       box-sizing: border-box;
     }
 
     .bloque-dos .titulo {
+      grid-column: 1 / 2;
+      grid-row: 1;
       font-family: 'Barrio', cursive;
       font-size: 7rem;
-      align-self:center;
+      margin: 0;
+      text-align: left;
       color: white;
     }
 
     .bloque-dos .parrafo {
+      grid-column: 2 / 3;
+      grid-row: 2;
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
-      font-size: 1.5rem;
-      align-self: flex-end;
-      max-width: 500px;
-      text-align: center;
+      font-size: 1.8rem;
+      max-width: 600px;
+      text-align: right; /* Alineado a la derecha para contraste */
+      align-self: center;
+      justify-self: end;
       color: white;
+      line-height: 1.4;
     }
 
+    /* SECCIÓN IMÁGENES FINALES (MÁS GRANDES) */
     .imagenes-finales {
       background: white;
       color: #00B6C9;
-      padding: 4rem 2rem;
+      padding: 4rem 0;
       width: 100vw;
-      height: 100vh;
-      position: relative;
+      min-height: 110vh; /* Un poco más de aire */
       text-align: center;
     }
 
     .imagenes-finales h2 {
       font-family: 'Barrio', cursive;
-      font-size: 3rem;
+      font-size: 4rem;
       margin-bottom: 2rem;
       color: #00B6C9;
     }
 
     .carousel {
-      width: 100vw;
-      height: 70vh;
+      width: 95vw; /* Casi todo el ancho */
+      height: 85vh; /* Casi todo el alto */
+      margin: 0 auto;
       overflow: hidden;
       position: relative;
       display: flex;
@@ -168,131 +112,85 @@
     .carousel img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover; /* Cambiado a cover para llenar el espacio */
       position: absolute;
       opacity: 0;
       transition: opacity 1s ease-in-out;
-      background: white;
-      pointer-events: none; /* ← AÑADIDO PARA PERMITIR HACER CLIC EN LOS ENLACES DE ABAJO */
+      pointer-events: none;
     }
 
     .carousel img.active {
       opacity: 1;
     }
 
+    /* SECCIÓN FINAL */
     .final-section {
       background: white;
       text-align: center;
-      width: 100vw;
-      height: 100vh;
-      position: relative;
-      padding: 4rem 2rem;
+      padding: 6rem 2rem;
     }
 
     .final-section h1 {
       font-family: 'Barrio', cursive;
       color: #00B6C9;
-      font-size: 4rem;
+      font-size: 5rem;
       margin-bottom: 2rem;
     }
 
     .final-section p {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1rem;
+      font-size: 1.2rem;
       color: black;
-      margin-bottom: 3rem;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .final-section h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 2rem;
-      margin-bottom: 1rem;
+      margin: 0 auto 4rem auto;
+      max-width: 900px;
+      line-height: 1.6;
     }
 
     .final-icons {
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      margin-top: 1rem;
+      gap: 3rem;
     }
 
     .final-icons img {
-      width: 40px;
-      height: 40px;
+      width: 60px;
+      height: 60px;
     }
 
-    .concepto-contenido {
-      display:flex;
-      align-items: left;
-      justify-content: space-between;
-      gap: 2rem;
-      max-width: 1400px;
-      width: 100%;
-      padding: 0 3rem;
+    /* RESPONSIVO PARA MÓVILES */
+    @media (max-width: 768px) {
+      .bloque-dos {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+      }
+      .bloque-dos .titulo { font-size: 4rem; }
+      .bloque-dos .parrafo { font-size: 1.2rem; text-align: left; }
+      .carousel { height: 50vh; }
     }
-
-    .concepto-contenido p {
-      flex: 1.5;
-		text-align: left;
-    }
-	  @media (max-width: 430px) {
-  .nav-bar {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0 1rem;
-  }
-
-  .nav-bar li {
-    margin: 0.5rem;
-  }
-
-  .logo {
-    max-width: 60vw;
-    height: auto;
-  }
-
-  footer {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-  }
-
-  footer p {
-    width: 100%;
-  }
-}
-
-
   </style>
 </head>
 <body>
 
- <div class="hero">
-	  <a href="PROYECTOS.html" class="back-arrow">←</a>
+  <div class="hero">
+    <a href="PROYECTOS.html" class="back-arrow">←</a>
   </div>
+
   <div class="contenido">
     <p>
-        <strong> SHORT FILM ANIMATION</strong> <br> <br>
+      <strong>SHORT FILM ANIMATION</strong> <br> <br>
       <strong>TITLE:</strong> OSHI<br>
-<strong>CREATED BY:</strong> ARANZA ESPINOSA <br>
-<strong>SOFTWARES:</strong> BLENDER, ADOBE AFTER EFFECTS, ADOBE PHOTOSHOP, <br> ELEVENLABS.IA, ADOBE PREMIERE <BR>
-<strong>YEAR:</strong> 2025
+      <strong>CREATED BY:</strong> ARANZA ESPINOSA <br>
+      <strong>SOFTWARES:</strong> BLENDER, ADOBE AFTER EFFECTS, ADOBE PHOTOSHOP, <br> ELEVENLABS.IA, ADOBE PREMIERE <BR>
+      <strong>YEAR:</strong> 2025
     </p>
   </div>
-  </div>
-
-
-
-
 
   <section class="bloque-dos">
-    <p class="parrafo">OSHI is an experimental and symbolic short film that portrays the experience of a child with autism facing anxiety and sensory overload. Through a small bear living in a white world that gradually transforms into chaos, the story conveys the vital need for empathy and acceptance.
-</p>
-    <h2 class="titulo">NARRATIVE</h2>
+    <h2 class="titulo">STORY</h2>
+    <p class="parrafo">
+      OSHI is an experimental and symbolic short film that portrays the experience of a child with autism facing anxiety and sensory overload. Through a small bear living in a white world that gradually transforms into chaos, the story conveys the vital need for empathy and acceptance.
+    </p>
   </section>
 
   <section class="imagenes-finales">
@@ -311,25 +209,27 @@
 
   <section class="final-section">
     <h1>DEVELOPMENT</h1>
-    <p>As the sole creator of the project, I was responsible for the entire creative process. I developed the original story and designed the storyboard, establishing a unique aesthetic inspired by anime. To bring this vision to life, I combined 3D and 2D animation techniques, crafting a visual language that balances technical precision with deep emotional resonance.
-OSHI in essence, is an invitation to see th world with a new perspective.</p>
+    <p>As the sole creator of the project, I was responsible for the entire creative process. I developed the original story and designed the storyboard, establishing a unique aesthetic inspired by anime. To bring this vision to life, I combined 3D and 2D animation techniques, crafting a visual language that balances technical precision with deep emotional resonance.<br><br>
+    <strong>OSHI in essence, is an invitation to see the world with a new perspective.</strong></p>
+    
     <h2>SHORTFILM</h2>
     <div class="final-icons">
       <a href="https://youtu.be/p4IUJmvuvUM" target="_blank"><img src="descarga (5).jpg" alt="YouTube"></a>
-      <a href="https://www.behance.net/gallery/227221007/OSHI"target="_blank"><img src="descarga (4).jpg" alt="Behance"></a>
+      <a href="https://www.behance.net/gallery/227221007/OSHI" target="_blank"><img src="descarga (4).jpg" alt="Behance"></a>
     </div>
   </section>
 
   <script>
-    // Carrusel automático
     let index = 0;
     const images = document.querySelectorAll('.carousel img');
 
-    setInterval(() => {
+    function nextImage() {
       images[index].classList.remove('active');
       index = (index + 1) % images.length;
       images[index].classList.add('active');
-    }, 5000);
+    }
+
+    setInterval(nextImage, 4000); // 4 segundos para que se disfruten las imágenes grandes
   </script>
 
 </body>
