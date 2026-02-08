@@ -51,7 +51,7 @@
       line-height: 1.6;
     }
 
-    /* CARRUSEL MÁS GRANDE */
+    /* CARRUSEL MÁS PEQUEÑO Y CONTROLADO */
     .carousel-container {
       display: flex;
       flex-direction: column;
@@ -62,8 +62,8 @@
 
     .carousel-wrapper {
       position: relative;
-      width: 90%; /* Aumentado para mayor visibilidad */
-      max-width: 1100px; 
+      width: 70%; /* Reducido para que las imágenes no ocupen tanto ancho */
+      max-width: 700px; /* Límite de ancho más pequeño */
       margin: 0 auto;
     }
 
@@ -71,6 +71,7 @@
       overflow: hidden;
       border-radius: 15px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      background: #f9f9f9;
     }
 
     .carousel-content {
@@ -83,21 +84,22 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
     }
 
     .carousel-item img,
     .carousel-item video {
       width: 100%;
       height: auto;
+      max-height: 60vh; /* Limita la altura para que no scrollee demasiado */
       display: block;
-      border-radius: 10px;
-      object-fit: cover;
+      object-fit: contain; /* Asegura que la imagen se vea completa sin recortarse */
     }
 
     .carousel-description {
-      margin-top: 1.5rem;
-      font-size: 1.1rem;
-      color: #333;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      color: #666;
       font-weight: 400;
     }
 
@@ -105,33 +107,29 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.8);
+      background: none;
       border: none;
       color: red;
-      font-size: 3rem;
+      font-size: 2.5rem;
       cursor: pointer;
       z-index: 5;
-      padding: 10px;
-      border-radius: 50%;
       transition: 0.3s;
     }
 
     .carousel-arrow:hover {
-      background: white;
-      transform: translateY(-50%) scale(1.1);
+      transform: translateY(-50%) scale(1.2);
     }
 
-    .carousel-arrow.left { left: -70px; }
-    .carousel-arrow.right { right: -70px; }
+    .carousel-arrow.left { left: -50px; }
+    .carousel-arrow.right { right: -50px; }
 
-    /* SECCIÓN FLIPBOOK MEJORADA */
     .flipbook-section {
       margin: 6rem 0;
       text-align: center;
     }
 
     .flipbook-link {
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: 900;
       color: red;
       text-decoration: none;
@@ -144,17 +142,18 @@
       opacity: 0.8;
     }
 
-    /* Responsivo */
-    @media (max-width: 1200px) {
-      .carousel-arrow.left { left: 10px; }
-      .carousel-arrow.right { right: 10px; }
+    @media (max-width: 1024px) {
+      .carousel-wrapper { width: 85%; }
+      .carousel-arrow.left { left: -40px; }
+      .carousel-arrow.right { right: -40px; }
     }
 
     @media (max-width: 768px) {
       h1 { font-size: 2.5rem; }
-      .carousel-wrapper { width: 95%; }
+      .carousel-wrapper { width: 90%; }
       .carousel-arrow { font-size: 2rem; }
-      .flipbook-link { font-size: 2rem; }
+      .carousel-arrow.left { left: 5px; color: rgba(255,0,0,0.6); }
+      .carousel-arrow.right { right: 5px; color: rgba(255,0,0,0.6); }
     }
   </style>
 </head>
@@ -231,6 +230,5 @@
 
 </body>
 </html>
-
 
 
