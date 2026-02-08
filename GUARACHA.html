@@ -40,7 +40,6 @@
             overflow: hidden;
         }
 
-        /* Imágenes que cubren todo el fondo */
         .full-img {
             width: 100%;
             height: 100%;
@@ -75,7 +74,6 @@
             color: #ccc;
         }
 
-        /* Grids adaptables */
         .grid-layout {
             display: grid;
             gap: 10px;
@@ -90,13 +88,29 @@
             object-fit: cover;
         }
 
-        /* Específico para 12 imágenes */
-        .grid-12 {
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(3, 1fr);
+        /* --- ESTILOS DEL CARRUSEL --- */
+        .carousel-container {
+            width: 100%;
+            height: 70vh;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Texto lateral estilo PDF */
+        .carousel-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out; /* Transición suave */
+        }
+
+        .carousel-container img.active {
+            opacity: 1;
+        }
+
         .side-text {
             position: absolute;
             left: 20px;
@@ -108,15 +122,14 @@
             z-index: 3;
         }
 
-        /* Footer de ancho total */
         .full-width-footer {
             width: 100%;
-            height: 20vh;
-            background-color: #111; /* Color oscuro para diferenciar */
+            height: 15vh;
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: auto;
+            z-index: 2;
         }
     </style>
 </head>
@@ -143,6 +156,7 @@
 
     <section class="page">
         <div class="side-text">INFRABABY</div> 
+
         <div class="grid-layout" style="grid-template-columns: repeat(3, 1fr);">
             <img src="img/ARANZA_ESPINOSA_22.jpg">
             <img src="img/ARANZA_ESPINOSA.jpg">
@@ -161,17 +175,21 @@
     </section>
 
     <section class="page">
-        <div class="grid-layout grid-12">
-            <img src="img/ARANZA_ESPINOSA_16.jpg"><img src="img/ARANZA_ESPINOSA_21.jpg">
-            <img src="img/ARANZA_ESPINOSA_15.jpg"><img src="img/ARANZA_ESPINOSA_23.jpg">
-            <img src="img/ARANZA_ESPINOSA_14.jpg"><img src="img/ARANZA_ESPINOSA_13.jpg"
-            <img src="img/ARANZA_ESPINOSA_17.jpg"><img src="img/ARANZA_ESPINOSA_24.jpg">
-            <img src="img/ARANZA_ESPINOSA_18.jpg"><img 
-            <img src="img/ARANZA_ESPINOSA_19.jpg"><img 
+        <div class="carousel-container" id="carousel">
+            <img src="img/ARANZA_ESPINOSA_16.jpg" class="active">
+            <img src="img/ARANZA_ESPINOSA_21.jpg">
+            <img src="img/ARANZA_ESPINOSA_15.jpg">
+            <img src="img/ARANZA_ESPINOSA_23.jpg">
+            <img src="img/ARANZA_ESPINOSA_14.jpg">
+            <img src="img/ARANZA_ESPINOSA_13.jpg">
+            <img src="img/ARANZA_ESPINOSA_17.jpg">
+            <img src="img/ARANZA_ESPINOSA_24.jpg">
+            <img src="img/ARANZA_ESPINOSA_18.jpg">
+            <img src="img/ARANZA_ESPINOSA_19.jpg">
+            <img src="img/ARANZA_ESPINOSA_7.jpg">
         </div>
         <div class="full-width-footer">
             <p class="label">PROYECTO COMPLETO 2025</p>
-            <img src="img/ARANZA_ESPINOSA_7.jpg"><img
         </div>
     </section>
 
@@ -184,6 +202,26 @@
     </section>
 
 </div>
+
+<script>
+    // Lógica del carrusel
+    const images = document.querySelectorAll('#carousel img');
+    let currentIndex = 0;
+
+    function nextImage() {
+        // Quitar clase activa de la imagen actual
+        images[currentIndex].classList.remove('active');
+        
+        // Calcular siguiente índice
+        currentIndex = (currentIndex + 1) % images.length;
+        
+        // Añadir clase activa a la nueva imagen
+        images[currentIndex].classList.add('active');
+    }
+
+    // Configurar el intervalo a 5000ms (5 segundos)
+    setInterval(nextImage, 5000);
+</script>
 
 </body>
 </html>
