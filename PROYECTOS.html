@@ -28,139 +28,148 @@
       margin: 0;
     }
 
-    .nav-bar li {
-      margin: 0 1rem;
-    }
-
-    .nav-bar li a,
-    .nav-bar li strong {
+    .nav-bar li { margin: 0 1rem; }
+    .nav-bar li a, .nav-bar li strong {
       text-decoration: none;
       color: white;
       font-size: 1rem;
       font-weight: 400;
     }
+    .nav-bar li strong { font-weight: 700; }
 
-    .nav-bar li strong {
+    .logo-container { flex-grow: 1; text-align: center; }
+    .logo { height: 180px; }
+
+    /* --- FILTROS --- */
+    .filter-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem 0;
+      position: sticky;
+      top: 0;
+      background: black;
+      z-index: 100;
+    }
+
+    .filter-btn {
+      background: none;
+      border: 1px solid white;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background-color: white;
+      color: black;
       font-weight: 700;
     }
 
-    .nav-bar li a:hover {
-      font-weight: 700;
-    }
-
-    .logo-container {
-      flex-grow: 1;
-      text-align: center;
-    }
-
-    .logo {
-      height: 200px;
-    }
-
+    /* --- GRID DINÁMICO (REEMPLAZA LAS FILAS) --- */
     main {
       padding: 2rem;
       display: flex;
-      flex-direction: column;
-      gap: 4rem;
-    }
-
-    .fila {
-      display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 2rem;
+      gap: 3rem; /* Espacio entre proyectos */
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: 60vh;
     }
-
-    /* Distribución estética estilo collage con variable CSS */
-    .fila:nth-child(1) .proyecto:nth-child(1) { --offsetY: -20px; }
-    .fila:nth-child(1) .proyecto:nth-child(2) { --offsetY: 10px; }
-    .fila:nth-child(1) .proyecto:nth-child(3) { --offsetY: -30px; }
-
-    .fila:nth-child(2) .proyecto:nth-child(1) { --offsetY: 15px; }
-    .fila:nth-child(2) .proyecto:nth-child(2) { --offsetY: -25px; }
-
-    .fila:nth-child(3) .proyecto:nth-child(1) { --offsetY: -10px; }
-    .fila:nth-child(3) .proyecto:nth-child(2) { --offsetY: 20px; }
-    .fila:nth-child(3) .proyecto:nth-child(3) { --offsetY: -5px; }
 
     .proyecto {
-  width: 200px;
-  height: 200px;
-  position: relative;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 10px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  will-change: transform;
-  transform: translateY(var(--offsetY, 0));
+      width: 220px;
+      height: 220px;
+      position: relative;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.4s ease;
+      display: block;
+      text-decoration: none;
     }
 
-    .fila .proyecto:hover {
-      transform: scale(1.05) translateY(var(--offsetY, 0));
+    /* Efecto Collage Dinámico */
+    .proyecto:nth-child(odd) { transform: translateY(-15px); }
+    .proyecto:nth-child(even) { transform: translateY(15px); }
+
+    .proyecto:hover {
+      transform: scale(1.05) translateY(0) !important;
+      z-index: 10;
     }
 
+    /* Manejo de visibilidad en el filtro */
+    .proyecto.hidden {
+      display: none;
+    }
+
+    /* --- ESTADO REPARACIÓN --- */
+    .reparacion {
+      filter: grayscale(1);
+      cursor: not-allowed;
+    }
+    .reparacion::before {
+      content: "COMING SOON / REPARACIÓN";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: #ff00ff;
+      padding: 10px;
+      z-index: 2;
+    }
+
+    /* Títulos al hacer Hover */
     .proyecto::after {
       content: attr(data-title);
       position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 0.5rem;
-      background: rgba(0, 0, 0, 0.5);
+      bottom: 0; left: 0; width: 100%;
+      padding: 0.8rem 0.5rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
       color: white;
+      font-size: 0.7rem;
       font-weight: 700;
       text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
+    .proyecto:hover::after { opacity: 1; }
 
     footer {
       background-color: black;
-      padding: 1rem 3rem;
+      padding: 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
+      border-top: 1px solid #222;
+      margin-top: 4rem;
     }
+    footer a { text-decoration: none; color: white; }
 
-    footer a {
-      text-decoration: none;
-      color: white;
+    @media (max-width: 768px) {
+      .nav-bar { flex-direction: column; gap: 1rem; padding: 1rem; }
+      .proyecto { width: 100%; max-width: 300px; transform: none !important; }
+      .filter-container { flex-wrap: wrap; padding: 1rem; }
     }
-
-    html {
-      scroll-behavior: smooth;
-    }
-	  @media (max-width: 430px) {
-  .nav-bar {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0 1rem;
-  }
-
-  .nav-bar li {
-    margin: 0.5rem;
-  }
-
-  .logo {
-    max-width: 60vw;
-    height: auto;
-  }
-
-  footer {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-  }
-
-  footer p {
-    width: 100%;
-  }
-}
-
   </style>
 </head>
 <body>
+
   <header>
     <nav>
       <ul class="nav-bar">
@@ -172,32 +181,62 @@
     </nav>
   </header>
 
-  <main>
-    <div class="fila">
-      <a href="EN_REPARACIÓN.html" class="proyecto" style="background-image: url('img/proyecto1.jpg');" data-title="COMING SOON">
-        </a>
-      <a href="OSHI.html" class="proyecto" style="background-image: url('img/PORT_OSHI.jpg');" data-title="OSHI, 2025" </a>
-      <a href="UN GRAN SALTO.html" class="proyecto" style="background-image: url('img/IMG_2785.JPG');" data-title="UN GRAN SALTO, 2023"></a>
-    </div>
-    <div class="fila">
-      <a href="LINK_UP.html" class="proyecto" style="background-image: url('img/portada metro.png');" data-title="LINK UP, 2024"></a>
-      <a href="SCOPE.html" class="proyecto" style="background-image: url('img/scope.png');" data-title="SCOPE, 2023"></a>
-    </div>
-    <div class="fila">
-      <a href="SIETE_VIDAS.html" class="proyecto" style="background-image: url('img/b7470938-f4ea-46d4-8928-4031301d42fe_rw_1920.jpg');" data-title="NINE LIVES, 2024"></a>
-      <a href="MODELADO_3D.html" class="proyecto" style="background-image: url('img/537f60d2-435d-4994-b5bd-8bbe04a06641.jpg');" data-title="3D MODELS"></a>
-      </div>
-      <div class="fila">
-          <a href="GUARACHA.html" class="proyecto" style="background-image: url('img/ARANZA_ESPINOSA_7.jpg');" data-title= "LA GUARACHA, 2025"></a>
-      </div>
+  <div class="filter-container">
+    <button class="filter-btn active" onclick="filterSelection('all')">TODOS</button>
+    <button class="filter-btn" onclick="filterSelection('animacion')">ANIMACIÓN</button>
+    <button class="filter-btn" onclick="filterSelection('apps')">APPS / UX</button>
+    <button class="filter-btn" onclick="filterSelection('3d-foto')">3D / FOTO</button>
+  </div>
+
+  <main id="galeria">
+    <a href="javascript:void(0)" class="proyecto animacion reparacion" style="background-image: url('img/proyecto1.jpg');" data-title="COMING SOON"></a>
+    
+    <a href="OSHI.html" class="proyecto animacion" style="background-image: url('img/PORT_OSHI.jpg');" data-title="OSHI, 2025"></a>
+    
+    <a href="UN GRAN SALTO.html" class="proyecto animacion" style="background-image: url('img/IMG_2785.JPG');" data-title="UN GRAN SALTO, 2023"></a>
+    
+    <a href="LINK_UP.html" class="proyecto animacion" style="background-image: url('img/portada metro.png');" data-title="LINK UP, 2024"></a>
+
+    <a href="SCOPE.html" class="proyecto apps" style="background-image: url('img/scope.png');" data-title="SCOPE, 2023"></a>
+    
+    <a href="SIETE_VIDAS.html" class="proyecto apps" style="background-image: url('img/b7470938-f4ea-46d4-8928-4031301d42fe_rw_1920.jpg');" data-title="NINE LIVES, 2024"></a>
+
+    <a href="MODELADO_3D.html" class="proyecto 3d-foto" style="background-image: url('img/537f60d2-435d-4994-b5bd-8bbe04a06641.jpg');" data-title="3D MODELS"></a>
+    
+    <a href="GUARACHA.html" class="proyecto 3d-foto" style="background-image: url('img/ARANZA_ESPINOSA_7.jpg');" data-title="LA GUARACHA, 2025"></a>
   </main>
 
   <footer>
     <p>Aranza Espinosa</p>
     <p><a href="mailto:aranzaespinosarios@gmail.com">aranzaespinosarios@gmail.com</a></p>
   </footer>
+
+  <script>
+    function filterSelection(c) {
+      const proyectos = document.getElementsByClassName("proyecto");
+      const btns = document.getElementsByClassName("filter-btn");
+
+      // Actualizar botón activo
+      for (let btn of btns) {
+        btn.classList.remove("active");
+        if (btn.getAttribute('onclick').includes(`'${c}'`)) {
+          btn.classList.add("active");
+        }
+      }
+
+      // Filtrar elementos
+      for (let i = 0; i < proyectos.length; i++) {
+        if (c === "all") {
+          proyectos[i].classList.remove("hidden");
+        } else {
+          if (proyectos[i].classList.contains(c)) {
+            proyectos[i].classList.remove("hidden");
+          } else {
+            proyectos[i].classList.add("hidden");
+          }
+        }
+      }
+    }
+  </script>
 </body>
 </html>
-
-
-
