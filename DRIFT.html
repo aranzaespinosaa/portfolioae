@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>DRIFT — Espacio Creativo Colaborativo</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* CARGA DE TIPOGRAFÍA LOCAL */
+    @font-face {
+      font-family: 'Road Radio Bold';
+      src: url('roadradio_bold.otf') format('opentype');
+      font-weight: bold;
+      font-style: normal;
+    }
+
+    :root {
+      --azul-primario: #2E4BE3;
+      --azul-claro: #E8F0FE;
+      --blanco: #FFFFFF;
+      --negro: #0A0A0A;
+      --gris: #6B7280;
+      /* Ajustes Safe Area para iPhone moderno[cite: 1] */
+      --safe-top: env(safe-area-inset-top, 20px);
+      --safe-bottom: env(safe-area-inset-bottom, 20px);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: "Space Grotesk", sans-serif;
+      background-color: var(--azul-claro);
+      color: var(--negro);
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* TIPOGRAFÍA ROAD RADIO BOLD */
+    h1, h2, h3, h4, .logo, .font-name {
+      font-family: 'Road Radio Bold', sans-serif;
+    }
+
+    /* BOTÓN IDIOMA NAV */
+    #btn-idioma {
+      background: var(--azul-primario);
+      color: white;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+    #btn-idioma:hover { opacity: 0.8; }
+
+    /* FLECHA[cite: 1] */
+    .back-arrow {
+      position: fixed;
+      top: calc(var(--safe-top) + 5px);
+      left: 20px;
+      font-size: 2rem;
+      color: var(--azul-primario);
+      text-decoration: none;
+      z-index: 200;
+    }
+
+    /* NAV[cite: 1] */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: calc(var(--safe-top) + 10px) 20px 10px 60px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(232, 240, 254, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 100;
+    }
+    .logo { font-size: 1.5rem; font-weight: 700; color: var(--azul-primario); letter-spacing: 2px;}
+    .nav-links { display:flex; gap:2.5rem; list-style:none; align-items: center; }
+    .nav-links a { text-decoration:none; color:var(--negro); font-weight:500;}
+
+    /* HERO[cite: 1] */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 120px 20px 4rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 10vw, 7rem);
+      color: var(--azul-primario);
+      font-weight: 700;
+    }
+    .hero .drift-t { transform: skewX(-10deg); display: inline-block; }
+    .hero p {
+      margin-top: 1rem;
+      font-size: 1.25rem;
+      max-width: 700px;
+      color: var(--gris);
+      margin-bottom: 3rem;
+    }
+
+    /* MOCKUPS ESTRATEGIA[cite: 1] */
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 15px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 2rem 0 4rem;
+    }
+    .iphone-mockup { width: 100%; height: auto; object-fit: contain; }
+
+    /* REELS SECCION[cite: 1] */
+    .reels-in-hero {
+      width: 100%;
+      max-width: 1000px;
+      margin-top: 4rem;
+    }
+    .reels-in-hero h2 { margin-bottom: 2rem; font-size: 2rem; }
+    
+    .reel-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    
+    .reel-mobile-box {
+      width: clamp(140px, 45%, 280px);
+      aspect-ratio: 9 / 16;
+      background: var(--negro);
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .reel-mobile-box video { width: 100%; height: 100%; object-fit: cover; }
+
+    .reel-horizontal-box {
+      width: 100%;
+      max-width: 580px;
+      aspect-ratio: 16 / 9;
+      background: var(--negro);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    .reel-horizontal-box video { width: 100%; height: 100%; object-fit: cover; }
+
+    .btn-primary {
+      background: var(--azul-primario);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      transition: .3s;
+    }
+
+    /* BRAND KIT - ORGANIZACIÓN ORIGINAL */
+    .brand-kit { padding: 8rem 4rem; background: white; }
+    .section-header { text-align: center; margin-bottom: 4rem; }
+    
+    .tab-content { display: none; max-width: 1000px; margin: auto; }
+    .tab-content.active { display: block; }
+
+    .logo-subsection { margin-bottom: 4rem; text-align: center; }
+    .logo-subsection h4 { margin-bottom: 1.5rem; color: var(--gris); text-transform: uppercase; font-size: 0.9rem; }
+    
+    .logo-display { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .logo-card {
+      background: var(--azul-claro);
+      padding: 2rem;
+      border-radius: 24px;
+      text-align: center;
+      min-height: 250px;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .logo-card img { max-width: 100%; height: auto; object-fit: contain; }
+    .logo-card.dark { background: var(--negro); }
+    .logo-card.full-width { grid-column: 1 / -1; }
+
+    .brand-tabs { display: flex; justify-content: center; gap: .5rem; margin-bottom: 3rem; flex-wrap: wrap; }
+    .tab-btn { padding: 1rem 2rem; border: none; background: var(--azul-claro); border-radius: 50px; font-weight: 600; cursor: pointer; }
+    .tab-btn.active { background: var(--azul-primario); color: white; }
+
+    .colors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem; }
+    .color-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+    .color-swatch { height: 180px; width: 100%; }
+    .color-info { padding: 1rem; text-align: center; color: var(--gris); }
+
+    .typography-display { text-align: center; }
+    .font-name { font-size: clamp(3rem, 8vw, 6rem); }
+    .alphabet { color: var(--gris); margin-top: 1rem; line-height: 2; }
+
+    .icon-display { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .icon-card { background: transparent; padding: 1rem; height: 400px; display: flex; align-items: center; justify-content: center; }
+    .icon-card img { width: 100%; height: 100%; object-fit: contain; }
+
+    footer { 
+      background: black; color: white; 
+      padding: 3rem 2rem calc(var(--safe-bottom) + 3rem); 
+      text-align: center; 
+    }
+
+    @media (max-width: 768px) {
+        nav { padding-left: 55px; }
+        .nav-links { gap: 1rem; }
+        .nav-links a { font-size: 0.9rem; }
+        .brand-kit { padding: 4rem 1.5rem; }
+        .icon-display { grid-template-columns: 1fr; gap: 0; }
+        .icon-card { height: 300px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<a class="back-arrow" href="PROYECTOS.html">←</a>
+
+<nav>
+  <div class="logo"></div>
+  <ul class="nav-links">
+    <li><a href="#inicio" data-key="nav-start">Inicio</a></li>
+    <li><a href="#brand-kit" data-key="nav-brand">Brand Kit</a></li>
+    <li><button id="btn-idioma">EN</button></li>
+  </ul>
+</nav>
+
+<section class="hero" id="inicio">
+  <h1>DRIF<span class="drift-t">T</span></h1>
+  <p data-key="hero-p">Estrategia de redes sociales para DRIFT, un espacio creativo y colaborativo.</p>
+
+  <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
+    <a href="#brand-kit" class="btn-primary" data-key="btn-kit">Explorar Brand Kit</a>
+    <a href="https://www.instagram.com/drift_bar?igsh=dnNsc3o2MHA3N3Nh" 
+       target="_blank"
+       class="btn-primary" 
+       style="background:black;" data-key="btn-insta">
+       Explorar DRIFT
+    </a>
+  </div>
+
+  <div class="strategy-grid">
+    <img src="MockUPhone_1.png" class="iphone-mockup">
+    <img src="MockUPhone_2.png" class="iphone-mockup">
+    <img src="MockUPhone_3.png" class="iphone-mockup">
+    <img src="MockUPhone_4.png" class="iphone-mockup">
+    <img src="MockUPhone_5.png" class="iphone-mockup">
+  </div>
+
+  <div class="reels-in-hero">
+    <h2 data-key="reels-h2">Reels realizados para DRIFT</h2>
+    <div class="reel-container">
+      <div class="reel-mobile-box">
+        <video controls src="DRIFT_WALK.mp4"></video>
+      </div>
+      <div class="reel-mobile-box">
+        <video controls src="DRIFT_STAMPS.mp4"></video>
+      </div>
+      <div class="reel-horizontal-box">
+        <video controls src="WhatsApp Video 2026-05-06 at 17.31.18.mp4"></video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="brand-kit" id="brand-kit">
+  <div class="section-header">
+    <h2 data-key="kit-h2">Brand Kit</h2>
+    <p data-key="kit-p">Todos los elementos visuales de DRIFT en un solo lugar.</p>
+  </div>
+
+  <div class="brand-tabs">
+    <button class="tab-btn active" data-tab="logo" data-key="tab-logo">Logo</button>
+    <button class="tab-btn" data-tab="colores" data-key="tab-colors">Colores</button>
+    <button class="tab-btn" data-tab="tipografia" data-key="tab-typo">Tipografía</button>
+    <button class="tab-btn" data-tab="icono" data-key="tab-mascot">Mascota</button>
+  </div>
+
+  <div class="tab-content active" id="logo">
+    <div class="logo-subsection">
+        <h4 data-key="sub-logo-main">Logo Principal</h4>
+        <div class="logo-display">
+          <div class="logo-card full-width">
+             <img src="DRIFT_LOGO_COL.png" alt="Logo Drift Color">
+          </div>
+        </div>
+    </div>
+
+    <div class="logo-subsection">
+        <h4 data-key="sub-logo-posneg">Positivo / Negativo</h4>
+        <div class="logo-display">
+            <div class="logo-card" style="background: white; border: 1px solid #eee;">
+                <img src="DRIFT_LOGO_NEG.png" alt="Logo Drift Negativo">
+            </div>
+            <div class="logo-card" style="background: black;">
+                <img src="DRIFT_LOGO_POS_NEG.png" alt="Logo Drift Positivo Negativo">
+            </div>
+        </div>
+    </div>
+
+    <div class="logo-subsection">
+        <h4 data-key="sub-logo-zone">Zona de Neutralidad</h4>
+        <div class="logo-display">
+          <div class="logo-card full-width">
+             <img src="LINEAMIENTOS_LOG.png" alt="Lineamientos Logotipo">
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="colores">
+    <div class="colors-grid">
+      <div class="color-card"><div class="color-swatch" style="background:#2E4BE3;"></div><div class="color-info" data-key="c1">Azul Primario — #2E4BE3</div></div>
+      <div class="color-card"><div class="color-swatch" style="background:#E8F0FE;"></div><div class="color-info" data-key="c2">Azul Claro — #E8F0FE</div></div>
+      <div class="color-card"><div class="color-swatch" style="background:white; border:1px solid #ddd;"></div><div class="color-info" data-key="c3">Blanco — #FFFFFF</div></div>
+      <div class="color-card"><div class="color-swatch" style="background:black;"></div><div class="color-info" data-key="c4">Negro — #0A0A0A</div></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tipografia">
+    <div class="typography-display">
+      <h3 class="font-name">ROAD RADIO BOLD</h3>
+      <p class="alphabet">
+        A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z<br>
+        a b c d e f g h i j k l m n ñ o p q r s t u v w x y z<br>
+        0 1 2 3 4 5 6 7 8 9
+      </p>
+    </div>
+  </div>
+
+  <div class="tab-content" id="icono">
+    <div class="icon-display">
+      <div class="icon-card"><img src="DRIF_FRENTE.png"></div>
+      <div class="icon-card"><img src="DRIF_ATRAS.png"></div>
+    </div>
+  </div>
+
+</section>
+
+<footer data-key="footer">© 2026 DRIFT. Todos los derechos reservados.</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabBtns = document.querySelectorAll(".tab-btn");
+      const tabContents = document.querySelectorAll(".tab-content");
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          tabBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          tabContents.forEach(c => c.classList.remove("active"));
+          document.getElementById(btn.dataset.tab).classList.add("active");
+        });
+      });
+    });
+
+    const textos = {
+      en: {
+        "nav-start": "Home", "nav-brand": "Brand Kit", "hero-p": "Social media strategy for DRIFT, a collaborative and creative space.",
+        "btn-kit": "Explore Brand Kit", "btn-insta": "Explore DRIFT", "reels-h2": "Reels made for DRIFT", "kit-h2": "Brand Kit",
+        "kit-p": "All DRIFT visual elements in one place.", "tab-logo": "Logo", "tab-colors": "Colors", "tab-typo": "Typography",
+        "tab-mascot": "Mascot", "sub-logo-main": "Main Logo", "sub-logo-posneg": "Positive / Negative", "sub-logo-zone": "Neutrality Zone",
+        "c1": "Primary Blue — #2E4BE3", "c2": "Light Blue — #E8F0FE", "c3": "White — #FFFFFF", "c4": "Black — #0A0A0A",
+        "footer": "© 2026 DRIFT. All rights reserved.", "btn-lang": "ES"
+      },
+      es: {
+        "nav-start": "Inicio", "nav-brand": "Brand Kit", "hero-p": "Estrategia de redes sociales para DRIFT, un espacio creativo y colaborativo.",
+        "btn-kit": "Explorar Brand Kit", "btn-insta": "Explorar DRIFT", "reels-h2": "Reels realizados para DRIFT", "kit-h2": "Brand Kit",
+        "kit-p": "Todos los elementos visuales de DRIFT en un solo lugar.", "tab-logo": "Logo", "tab-colors": "Colores", "tab-typo": "Tipografía",
+        "tab-mascot": "Mascota", "sub-logo-main": "Logo Principal", "sub-logo-posneg": "Positivo / Negativo", "sub-logo-zone": "Zona de Neutralidad",
+        "c1": "Azul Primario — #2E4BE3", "c2": "Azul Claro — #E8F0FE", "c3": "Blanco — #FFFFFF", "c4": "Negro — #0A0A0A",
+        "footer": "© 2026 DRIFT. Todos los derechos reservados.", "btn-lang": "EN"
+      }
+    };
+
+    const btnIdioma = document.getElementById('btn-idioma');
+    let idiomaActual = localStorage.getItem('idiomaPreferido') || 'es';
+
+    function actualizarTextos() {
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const clave = el.getAttribute('data-key');
+        if (textos[idiomaActual][clave]) {
+          el.textContent = textos[idiomaActual][clave];
+        }
+      });
+      btnIdioma.textContent = textos[idiomaActual]["btn-lang"];
+      localStorage.setItem('idiomaPreferido', idiomaActual);
+    }
+
+    btnIdioma.addEventListener('click', () => {
+      idiomaActual = (idiomaActual === 'es') ? 'en' : 'es';
+      actualizarTextos();
+    });
+
+    actualizarTextos();
+</script>
+
+</body>
+</html>

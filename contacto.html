@@ -2,28 +2,40 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Aranza Espinosa | Contacto</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
+    :root {
+      /* Variables para iPhone con Notch/Dynamic Island */
+      --safe-area-top: env(safe-area-inset-top, 20px);
+      --safe-area-bottom: env(safe-area-inset-bottom, 20px);
+    }
+
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
       background-color: white;
       color: black;
+      -webkit-font-smoothing: antialiased;
     }
 
     header {
       background-color: white;
-      padding: 1rem 3rem;
+      /* Ajuste dinámico para la parte superior del iPhone */
+      padding: calc(var(--safe-area-top) + 10px) 20px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #f0f0f0;
     }
 
     .nav-bar {
       display: flex;
-      gap: 2rem;
+      gap: 15px;
       align-items: center;
     }
 
@@ -31,161 +43,184 @@
       text-decoration: none;
       color: black;
       font-weight: 400;
+      font-size: 0.85rem;
     }
 
-    .nav-bar a.activo {
+    #btn-idioma {
+      background: black;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .logo-header {
+      height: 40px; /* Tamaño optimizado para móvil */
+      width: auto;
+    }
+
+    .contact-label {
       font-weight: 900;
-    }
-
-    .logo {
-      height: 200px;
+      font-size: 0.85rem;
     }
 
     main {
       display: flex;
-      justify-content: space-between;
-      padding: 2rem 4rem;
-      flex-wrap: wrap;
-    }
-
-    .info {
-      display: flex;
       flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .nombre {
-      font-size: 3rem;
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-    }
-
-    .nombre span:last-child {
-      display: block;
-      margin-left: 50px;
-    }
-
-    .info-item {
-      display: flex;
       align-items: center;
-      gap: 1rem;
-      font-size: 1rem;
-    }
-
-    .icono {
-      width: 50px;
-      height: 50px;
-      object-fit: contain;
-    }
-	   .icono2 {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-    }
-
-    .redes {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 4rem;
-}
-
+      padding: 20px;
+      gap: 30px;
+      /* Espacio inferior para evitar el indicador de inicio del iPhone */
+      padding-bottom: calc(var(--safe-area-bottom) + 40px);
     }
 
     .derecha {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      gap: 1rem;
-      position: relative;
+      width: 100%;
+      order: 1; /* El nombre y video van primero en móvil */
+    }
+
+    .nombre {
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .nombre span {
+        display: block;
+    }
+
+    .nombre span:last-child {
+      margin-left: 0; /* Centrado en móvil para mejor estética */
     }
 
     .video-circulo {
-      width: 300px;
-      height: 300px;
-      background-color: transparent;
+      width: 260px;
+      height: 260px;
       border-radius: 50%;
       overflow: hidden;
       position: relative;
-	  display: flex;
-      justify-content: center;
-      align-items: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
 
     .video-circulo video {
-      width: auto;
+      width: 100%;
       height: 100%;
       object-fit: cover;
-		min-height: 100%;
-		min-width: 100%;
-		position: absolute;
-		transform: translate(-50%, -50%);
-		top: 50%;
-		left: 50%;
     }
 
-    .video-texto {
-      position: absolute;
-      right: -40px;
-      top: 50%;
-      transform: rotate(90deg) translateY(-50%);
-      transform-origin: right center;
-      font-weight: 600;
-      font-size: 1rem;
-      color: white;
+    .info {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      order: 2;
     }
 
-    @media (max-width: 800px) {
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .icono {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .redes {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .icono2 {
+      width: 45px;
+      height: 45px;
+      object-fit: contain;
+    }
+
+    /* --- AJUSTES PARA ESCRITORIO (800px+) --- */
+    @media (min-width: 800px) {
+      header {
+        padding: 1rem 3rem;
+      }
+      
+      .logo-header {
+        height: 120px;
+      }
+
       main {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 4rem;
+        align-items: flex-start;
       }
 
       .derecha {
-        margin-top: 2rem;
+        width: auto;
+        order: 2;
+      }
+
+      .nombre {
+        font-size: 4rem;
+        text-align: left;
+      }
+
+      .nombre span:last-child {
+        margin-left: 50px; /* Efecto escalonado en escritorio */
+      }
+
+      .video-circulo {
+        width: 350px;
+        height: 350px;
+      }
+
+      .info {
+        width: auto;
+        align-items: flex-start;
+        order: 1;
+        padding-top: 40px;
+      }
+
+      .info-item {
+        justify-content: flex-start;
+      }
+
+      .redes {
+        justify-content: flex-start;
+        margin-top: 50px;
       }
     }
-	  @media (max-width: 430px) {
-  .nav-bar {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0 1rem;
-  }
-
-  .nav-bar li {
-    margin: 0.5rem;
-  }
-
-  .logo {
-    max-width: 60vw;
-    height: auto;
-  }
-
-  footer {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-  }
-
-  footer p {
-    width: 100%;
-  }
-}
-
   </style>
 </head>
 <body>
 
   <header>
     <nav class="nav-bar">
-      <a href="index.html">HOME</a>
-      <a href="PROYECTOS.html">PROJECTS</a>
+      <a href="index.html" data-key="nav-home">HOME</a>
+      <a href="PROYECTOS.html" data-key="nav-projects">PROJECTS</a>
+      <button id="btn-idioma">ES</button>
     </nav>
-    <img src="AE.jpg" alt="Logo AE" class="logo">
-    <a href="#" style="font-weight: 900; text-decoration: none; color: black;">CONTACT</a>
+    <img src="AE.jpg" alt="Logo AE" class="logo-header">
+    <span class="contact-label" data-key="nav-contact">CONTACT</span>
   </header>
 
   <main>
@@ -196,14 +231,14 @@
       </div>
       <div class="info-item">
         <img src="descarga (6).jpg" alt="Ubicación" class="icono">
-        <span>Madrid</span>
+        <span data-key="location">Madrid</span>
       </div>
 
       <div class="redes">
         <a href="https://www.instagram.com/aranza.sht" target="_blank">
           <img src="5cc86c1b-28ef-4e91-9938-93545315adab.jpg" alt="Instagram" class="icono2">
         </a>
-        <a href= "https://www.linkedin.com/in/aranzaespinosarios" target="_blank">
+        <a href="https://www.linkedin.com/in/aranzaespinosarios" target="_blank">
           <img src="Download Linkedin logo vector, Linkedin symbol, Linkedin icon free vector.jpg" alt="LinkedIn" class="icono2">
         </a>
         <a href="https://www.youtube.com/@aranza_espinosa" target="_blank">
@@ -221,17 +256,51 @@
         <span>ESPINOSA</span>
       </div>
       <div class="video-circulo">
-        <video autoplay loop muted>
+        <video autoplay loop muted playsinline>
           <source src="Comp 1.mp4" type="video/mp4">
-          Tu navegador no soporta video HTML5.
         </video>
-        <div class="video-texto">¡CONTÁCTAME!</div>
       </div>
     </div>
   </main>
 
+  <script>
+    const textos = {
+      en: {
+        "nav-home": "HOME",
+        "nav-projects": "PROJECTS",
+        "nav-contact": "CONTACT",
+        "location": "Madrid",
+        "btn-lang": "ES"
+      },
+      es: {
+        "nav-home": "INICIO",
+        "nav-projects": "PROYECTOS",
+        "nav-contact": "CONTACTO",
+        "location": "Madrid",
+        "btn-lang": "EN"
+      }
+    };
+
+    const btnIdioma = document.getElementById('btn-idioma');
+    let idiomaActual = localStorage.getItem('idiomaPreferido') || 'en';
+
+    function actualizarTextos() {
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const clave = el.getAttribute('data-key');
+        if (textos[idiomaActual][clave]) {
+          el.textContent = textos[idiomaActual][clave];
+        }
+      });
+      btnIdioma.textContent = textos[idiomaActual]["btn-lang"];
+      localStorage.setItem('idiomaPreferido', idiomaActual);
+    }
+
+    btnIdioma.addEventListener('click', () => {
+      idiomaActual = (idiomaActual === 'en') ? 'es' : 'en';
+      actualizarTextos();
+    });
+
+    actualizarTextos();
+  </script>
 </body>
 </html>
-
-
-

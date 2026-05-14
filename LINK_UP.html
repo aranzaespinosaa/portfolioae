@@ -2,40 +2,57 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- viewport-fit=cover permite que el fondo use toda la pantalla en iPhones modernos[cite: 1] -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>LINK_UP</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
   <style>
+    :root {
+      /* Variables para manejar las zonas seguras de iOS[cite: 1] */
+      --safe-top: env(safe-area-inset-top, 20px);
+      --safe-bottom: env(safe-area-inset-bottom, 20px);
+    }
+
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
       background-color: #fff;
       color: #000;
+      -webkit-font-smoothing: antialiased;
     }
+
+    /* BOTÓN IDIOMA - Ajustado a Safe Area[cite: 1] */
+    #btn-idioma {
+      position: fixed;
+      top: var(--safe-top);
+      right: 20px;
+      z-index: 100;
+      background: white;
+      color: black;
+      border: 1px solid black;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+    #btn-idioma:hover { background: #000; color: #fff; }
 
     .hero {
       width: 100%;
       height: 100vh;
-      background-image: url('img/portada metro.png'); /* cambia por tu imagen */
+      background-image: url('img/portada metro.png');
       background-size: cover;
       background-position: center;
       position: relative;
     }
 
-    .hero h1 {
-      position: absolute;
-      bottom: 20px;
-      width: 100%;
-      text-align: center;
-      font-size: 10rem;
-      font-weight: 900;
-      margin: 0;
-      color: white;
-    }
-
+    /* FLECHA - Ajustada a Safe Area[cite: 1] */
     .back-arrow {
       position: absolute;
-      top: 20px;
+      top: var(--safe-top);
       left: 20px;
       font-size: 2rem;
       color: white;
@@ -44,125 +61,119 @@
     }
 
     .contenido {
-      padding: 2rem;
+      padding: 4rem 1.5rem;
       max-width: 800px;
-      margin-left: 2rem;
+      margin: 0 auto;
       font-weight: 400;
-    }
-
-    .imagenes-finales {
-      background: white;
-      color: black;
-      padding: 4rem 2rem;
-      width: 100vw;
-      height: 100vh;
-      position: relative;
-      text-align: center;
-    }
-
-    .imagenes-finales h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 3rem;
-      margin-bottom: 2rem;
-      color: black;
+      line-height: 1.6;
     }
 
     .final-section {
       background: white;
       text-align: center;
-      width: 100vw;
-      height: auto;
-      position: relative;
-      padding: 4rem 2rem;
+      width: 100%;
+      padding: 4rem 1.5rem calc(var(--safe-bottom) + 2rem);
+      box-sizing: border-box;
     }
 
     .final-section h1 {
       font-family: 'Montserrat', sans-serif;
       color: black;
-      font-size: 4rem;
+      font-size: clamp(2.5rem, 8vw, 4rem);
       margin-bottom: 2rem;
     }
 
-    .final-section p {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1rem;
-      color: black;
-      margin-bottom: 3rem;
+    .video-container {
+      width: 100%;
       max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto;
     }
 
-    .final-section h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 2rem;
-      text-align: center;
+    video {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
 
-    .final-icons {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 1rem;
+    @media (max-width: 768px) {
+      .contenido { text-align: center; }
+      .hero { height: 60vh; } /* Reducido en móvil para mejor scroll */
     }
-
-    .final-icons img {
-      width: 40px;
-      height: 40px;
-    }
-	  @media (max-width: 430px) {
-  .nav-bar {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0 1rem;
-  }
-
-  .nav-bar li {
-    margin: 0.5rem;
-  }
-
-  .logo {
-    max-width: 60vw;
-    height: auto;
-  }
-
-  footer {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-  }
-
-  footer p {
-    width: 100%;
-  }
-}
-
   </style>
 </head>
 <body>
-  <div class="hero">
-    <a href="PROYECTOS.html" class="back-arrow">←</a>
-  </div>
+
+  <button id="btn-idioma">EN</button>
+  <a href="PROYECTOS.html" class="back-arrow">←</a>
+
+  <div class="hero"></div>
 
   <div class="contenido">
     <p>
-        <strong>MOTION GRAPHIC MUSIC VIDEO INTRO</strong> <BR> <BR>
-      <strong>TITLE:</strong> LINK UP "Lyrics Video" <br>
-      <strong>CREATED BY:</strong> ARANZA ESPINOSA <br>
-      <strong>SOFTWARES:</strong> ADOBE AFTER EFFECTS, ADOBE ILLUSTRATOR, ADOBE PHOTOSHOP <br>
-      <strong>YEAR:</strong> 2024 <br><br><br><br><br>
-      <strong>Rights: © Sony Pictures (Spider-Man: Across the Spider-Verse) and Metro Boomin.</strong>
+      <strong data-key="tech-type">INTRO DE VIDEO MUSICAL MOTION GRAPHIC</strong> <BR> <BR>
+      <strong data-key="tech-title-label">TÍTULO:</strong> LINK UP "Lyrics Video" <br>
+      <strong data-key="tech-creator-label">CREADO POR:</strong> ARANZA ESPINOSA <br>
+      <strong data-key="tech-soft-label">SOFTWARES:</strong> ADOBE AFTER EFFECTS, ADOBE ILLUSTRATOR, ADOBE PHOTOSHOP <br>
+      <strong data-key="tech-year-label">AÑO:</strong> 2024 <br><br>
+      <strong data-key="rights-label">Derechos: © Sony Pictures (Spider-Man: Across the Spider-Verse) y Metro Boomin.</strong>
     </p>
   </div>
 
   <section class="final-section">
-    <h1>VIDEO</h1>
-
-    <video width="800" controls>
-      <source src="VÍDEO MP4.mp4" type="video/mp4">
-      Tu navegador no soporta la reproducción de video.
-    </video>
+    <h1 data-key="section-video">VIDEO</h1>
+    <div class="video-container">
+      <video controls playsinline>
+        <source src="VÍDEO MP4.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de video.
+      </video>
+    </div>
   </section>
+
+  <script>
+    const textos = {
+      es: {
+        "tech-type": "INTRO DE VIDEO MUSICAL MOTION GRAPHIC",
+        "tech-title-label": "TÍTULO:",
+        "tech-creator-label": "CREADO POR:",
+        "tech-soft-label": "SOFTWARES:",
+        "tech-year-label": "AÑO:",
+        "rights-label": "Derechos: © Sony Pictures (Spider-Man: Across the Spider-Verse) y Metro Boomin.",
+        "section-video": "VIDEO",
+        "btn-lang": "EN"
+      },
+      en: {
+        "tech-type": "MOTION GRAPHIC MUSIC VIDEO INTRO",
+        "tech-title-label": "TITLE:",
+        "tech-creator-label": "CREATED BY:",
+        "tech-soft-label": "SOFTWARES:",
+        "tech-year-label": "YEAR:",
+        "rights-label": "Rights: © Sony Pictures (Spider-Man: Across the Spider-Verse) and Metro Boomin.",
+        "section-video": "VIDEO",
+        "btn-lang": "ES"
+      }
+    };
+
+    const btnIdioma = document.getElementById('btn-idioma');
+    let idiomaActual = localStorage.getItem('idiomaPreferido') || 'es';
+
+    function actualizarTextos() {
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const clave = el.getAttribute('data-key');
+        if (textos[idiomaActual][clave]) {
+          el.innerHTML = textos[idiomaActual][clave];
+        }
+      });
+      btnIdioma.textContent = textos[idiomaActual]["btn-lang"];
+      localStorage.setItem('idiomaPreferido', idiomaActual);
+    }
+
+    btnIdioma.addEventListener('click', () => {
+      idiomaActual = (idiomaActual === 'es') ? 'en' : 'es';
+      actualizarTextos();
+    });
+
+    actualizarTextos();
+  </script>
 </body>
 </html>

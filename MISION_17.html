@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <!-- El viewport-fit=cover permite que el fondo use toda la pantalla del iPhone[cite: 1] -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Misión 17 | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Variables para manejar las zonas seguras de iOS[cite: 1] */
+      --safe-top: env(safe-area-inset-top, 20px);
+      --safe-bottom: env(safe-area-inset-bottom, 20px);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Montserrat", sans-serif;
+      background-color: #f8f6f1;
+      color: #2c2c2c;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* BOTÓN IDIOMA - Ajustado a Safe Area[cite: 1] */
+    #btn-idioma {
+      position: fixed;
+      top: var(--safe-top);
+      right: 20px;
+      z-index: 100;
+      background: #722F37;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+    #btn-idioma:hover { background: #8b6914; }
+
+    .hero-logo img {
+      max-width: 420px;
+      width: 90%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* FLECHA - Ajustada a Safe Area[cite: 1] */
+    .back-arrow {
+      position: absolute;
+      top: var(--safe-top);
+      left: 20px;
+      font-size: 2.5rem;
+      color: #722F37;
+      text-decoration: none;
+      z-index: 10;
+      transition: transform 0.3s ease;
+    }
+
+    .back-arrow:hover { transform: translateX(-5px); }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background-color: #f8f6f1;
+      overflow: hidden;
+    }
+
+    .hero-content { z-index: 2; animation: fadeInUp 1.2s ease-out; }
+
+    .wave-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 320px;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 300%;
+      height: 150%;
+      animation: waveRun 5s linear infinite, waveFloat 4s ease-in-out infinite;
+    }
+
+    .wave svg { width: 100%; height: 100%; display: block; }
+    .wave path { fill: #722F37; }
+
+    @keyframes waveRun { 0% { transform: translateX(0); } 100% { transform: translateX(-33.333%); } }
+    @keyframes waveFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(12px); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color:#D4AF37;
+      text-align: center;
+      margin-bottom: 3rem;
+      letter-spacing: 0.02em;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 2px;
+      background:#D4AF37;
+      margin: 1rem auto 0;
+    }
+
+    .gallery-section { padding: 6rem 1.5rem; background-color: #f8f6f1; }
+    .gallery-vertical { display: flex; flex-direction: column; gap: 3rem; align-items: center; max-width: 900px; margin: 0 auto; }
+    .gallery-item {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background-color: #e8e4dc;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.4s ease;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gallery-item img { width: 100%; height: 100%; object-fit: contain; border-radius: 10px; display: block; }
+    .gallery-item:hover { transform: scale(1.02); }
+    .gallery-caption { margin-top: 1rem; color: #666; font-size: 0.85rem; text-align: center; line-height: 1.5; }
+
+    .story-section { padding: 6rem 1.5rem; background: linear-gradient(180deg, #722f37 0%, #5a252b 100%); color: #f8f6f1; }
+    .story-content { font-family: "Montserrat", sans-serif; font-size: clamp(1rem, 3vw, 1.1rem); line-height: 2; text-align: justify; max-width: 900px; margin: 0 auto; }
+    .story-content p { margin-bottom: 2rem; }
+    .story-content .highlight { color: #d4af37; font-family: "Playfair Display", serif; font-style: italic; }
+    .story-content .year { font-family: "Playfair Display", serif; font-size: clamp(2.5rem, 8vw, 4rem); color: #d4af37; text-align: center; display: block; margin: 2rem 0; }
+
+    .logo-meaning-section { padding: 6rem 1.5rem; background-color: #f8f6f1; }
+    .logo-meaning-container {
+      display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: clamp(2rem, 5vw, 4rem); max-width: 1200px; margin: 0 auto;
+    }
+    .logo-image img { max-width: 480px; width: 100%; height: auto; object-fit: contain; display: block; }
+    .logo-text { flex: 1 1 500px; font-family: "Montserrat", sans-serif; font-size: 1rem; line-height: 1.9; color: #333; }
+    .logo-text strong { color: #722F37; font-weight: 700; }
+
+    @media (max-width: 900px) {
+      .logo-meaning-container { flex-direction: column; flex-wrap: wrap; }
+      .logo-text { text-align: left; width: 100%; }
+      .logo-image img { max-width: 300px; margin-bottom: 2rem; }
+      .wave-container { height: 200px; }
+      .back-arrow { font-size: 2rem; }
+    }
+
+    footer { padding: 3rem 2rem calc(var(--safe-bottom) + 1.5rem); background-color: #2c2c2c; color: #f8f6f1; text-align: center; font-family: "Montserrat", sans-serif; }
+    footer a { color: #d4af37; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <button id="btn-idioma">EN</button>
+  <a href="PROYECTOS.html" class="back-arrow">←</a>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-logo">
+        <img src="LOGO_VINO.png" alt="Logo Misión 17">
+      </div>
+    </div>
+    <div class="wave-container">
+      <div class="wave">
+        <svg viewBox="0 0 3600 200" preserveAspectRatio="none">
+          <path d="M0,100 C300,160 900,40 1200,100 C1500,160 2100,60 2400,100 C2700,140 3300,40 3600,100 L3600,300 L0,300 Z"></path>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-section">
+    <h2 class="section-title" data-key="title-brand">Diseño de Marca</h2>
+    <div class="gallery-vertical">
+      <div class="gallery-item"><img src="VINO_1.png"></div>
+      <div class="gallery-item"><img src="VINO_2.png"></div>
+      <div class="gallery-item"><img src="VINO_3.png"></div>
+      <p class="gallery-caption" data-key="gallery-soft">Softwares utilizados: <strong>Adobe Illustrator</strong>, <strong>Adobe Photoshop</strong></p>
+    </div>
+  </section>
+
+  <section class="story-section">
+    <h2 class="section-title" data-key="title-story">El Origen de la Leyenda</h2>
+    <div class="story-content">
+      <span class="year">1697</span>
+      <p data-key="p1">En el corazón del desierto californiano nació una historia que cambiaría el destino de la península. <span class="highlight">Misión 17 rinde homenaje al siglo XVII</span>, cuando los misioneros jesuitas establecieron la primera misión en Loreto, Baja California.</p>
+      <p data-key="p2">El vino fue más que un símbolo religioso; era sustento y cultura. La uva Misión, traída por los jesuitas, sobrevivió siglos de clima extremo, siendo el ADN vivo de la península.</p>
+      <p data-key="p3">Las misiones, unidas por el Camino Real, eran oasis de vida. <span class="highlight">Misión 17 evoca el viaje, la fe y la resiliencia</span>, en un homenaje a la vida que hizo florecer el desierto.</p>
+    </div>
+  </section>
+
+  <section class="logo-meaning-section">
+    <h2 class="section-title" data-key="title-meaning">Significado del Logo</h2>
+    <div class="logo-meaning-container">
+      <div class="logo-image"><img src="LOGO_VINO.png"></div>
+      <div class="logo-text">
+        <p data-key="m1"><strong>El Arco de la Misión:</strong> Representa la arquitectura colonial de las misiones jesuíticas y franciscanas que se establecieron en la península durante el siglo XVII.</p>
+        <p data-key="m2"><strong>El Racimo de Uvas:</strong> Ubicado en el centro del arco, este elemento deja claro que el producto es vino.</p>
+        <p data-key="m3"><strong>La Cruz Superior:</strong> Hace referencia directa al propósito original de las misiones.</p>
+        <p data-key="m4"><strong>El Número 17:</strong> Se refiere al siglo XVII, época en la que comenzó formalmente la vitivinicultura.</p>
+        <p data-key="m5"><strong>Slogan "Nuestra Misión es la Excelencia":</strong> Un compromiso diario de alcanzar la máxima calidad.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Aranza Espinosa</p>
+    <p><a href="mailto:aranzaespinosarios@gmail.com">aranzaespinosarios@gmail.com</a></p>
+  </footer>
+
+  <script>
+    const textos = {
+      es: {
+        "title-brand": "Diseño de Marca",
+        "gallery-soft": "Softwares utilizados: <strong>Adobe Illustrator</strong>, <strong>Adobe Photoshop</strong>",
+        "title-story": "El Origen de la Leyenda",
+        "p1": "En el corazón del desierto californiano nació una historia que cambiaría el destino de la península. Misión 17 rinde homenaje al siglo XVII, cuando los misioneros jesuitas establecieron la primera misión en Loreto, Baja California.",
+        "p2": "El vino fue más que un símbolo religioso; era sustento y cultura. La uva Misión, traída por los jesuitas, sobrevivió siglos de clima extremo, siendo el ADN vivo de la península.",
+        "p3": "Las misiones, unidas por el Camino Real, eran oasis de vida. Misión 17 evoca el viaje, la fe y la resiliencia, en un homenaje a la vida que hizo florecer el desierto.",
+        "title-meaning": "Significado del Logo",
+        "m1": "El Arco de la Misión: Representa la arquitectura colonial de las misiones jesuíticas y franciscanas que se establecieron en la península durante el siglo XVII.",
+        "m2": "El Racimo de Uvas: Ubicado en el centro del arco, este elemento deja claro que el producto es vino.",
+        "m3": "La Cruz Superior: Hace referencia directa al propósito original de las misiones.",
+        "m4": "El Número 17: Se refiere al siglo XVII, época en la que comenzó la vitivinicultura.",
+        "m5": "Slogan 'Nuestra Misión es la Excelencia': Un compromiso diario de alcanzar la máxima calidad.",
+        "btn-lang": "EN"
+      },
+      en: {
+        "title-brand": "Brand Design",
+        "gallery-soft": "Softwares used: <strong>Adobe Illustrator</strong>, <strong>Adobe Photoshop</strong>",
+        "title-story": "The Origin of the Legend",
+        "p1": "In the heart of the California desert, a story was born that would change the destiny of the peninsula. Mission 17 pays tribute to the 17th century.",
+        "p2": "Wine was more than a religious symbol; it was sustenance and culture. The Mission grape survived centuries of extreme climate.",
+        "p3": "The missions, joined by the Camino Real, were oases of life. Mission 17 evokes the journey, faith, and resilience of the desert.",
+        "title-meaning": "Logo Meaning",
+        "m1": "The Mission Arch: Represents colonial architecture from missions established in the peninsula during the 17th century.",
+        "m2": "The Bunch of Grapes: Located in the center, clearly identifying the product as wine.",
+        "m3": "The Superior Cross: Direct reference to the original purpose of the missions.",
+        "m4": "The Number 17: Refers to the 17th century, when viticulture formally began in the region.",
+        "m5": "Slogan 'Our Mission is Excellence': A daily commitment to reaching peak quality.",
+        "btn-lang": "ES"
+      }
+    };
+
+    const btnIdioma = document.getElementById('btn-idioma');
+    let idiomaActual = localStorage.getItem('idiomaPreferido') || 'es';
+
+    function actualizarTextos() {
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const clave = el.getAttribute('data-key');
+        if (textos[idiomaActual][clave]) {
+          el.innerHTML = textos[idiomaActual][clave];
+        }
+      });
+      btnIdioma.textContent = textos[idiomaActual]["btn-lang"];
+      localStorage.setItem('idiomaPreferido', idiomaActual);
+    }
+
+    btnIdioma.addEventListener('click', () => {
+      idiomaActual = (idiomaActual === 'es') ? 'en' : 'es';
+      actualizarTextos();
+    });
+
+    actualizarTextos();
+  </script>
+</body>
+</html>

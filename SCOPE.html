@@ -1,137 +1,282 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SCOPE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background-color: #1e0e32;
-      color: white;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SCOPE - Cine Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --safe-top: env(safe-area-inset-top, 20px);
+            --safe-bottom: env(safe-area-inset-bottom, 20px);
+        }
 
-    .hero-image {
-  text-align: center;
-}
+        body { 
+            margin: 0; 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #000000; 
+            color: white; 
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-.hero-image img {
-  width: 80%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-.content-section p {
-  font-size: 1.2rem;
-  max-width: 800px;
-  margin: 0 auto 4rem auto;
-  line-height: 1.6;
-  text-align: center;
-}
+        #btn-idioma {
+            position: fixed;
+            top: var(--safe-top);
+            right: 20px;
+            z-index: 1000;
+            background: #a855f7;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+            transition: 0.3s;
+        }
 
-    }
+        .back-arrow {  
+            position: absolute;  
+            top: var(--safe-top);  
+            left: 20px;  
+            font-size: 2rem;  
+            color: white;  
+            text-decoration: none;  
+            z-index: 1000;  
+        }
 
-    .content-section {
-      padding: 2rem 2rem;
-      text-align: center;
-      background-color: #1e0e32;
-    }
+        .hero-section {
+            text-align: center;
+            padding: calc(var(--safe-top) + 80px) 20px 50px;
+            background: radial-gradient(circle at top right, #321655 0%, #000000 70%);
+        }
 
-    .content-section h2 {
-      font-size: 2rem;
-      font-weight: 900;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
+        .hero-section h1 {
+            font-size: clamp(3rem, 15vw, 5rem);
+            font-weight: 900;
+            margin: 0;
+        }
 
-    .content-section p {
-      font-size: 1.2rem;
-      max-width: 800px;
-      margin: 0 auto 4rem auto;
-      line-height: 1.6;
-    }
+        .hero-section p {
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            color: #b0b0b0;
+            max-width: 600px;
+            margin: 20px auto;
+        }
 
-    .figma-prototype {
-      margin-top: 4rem;
-      text-align: center;
-    }
+        .feature-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
 
-    .figma-prototype iframe {
-      width: 100%;
-      max-width: 1000px;
-      height: 600px;
-      border: none;
-    }
+        .feature-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 80px;
+            gap: 40px;
+        }
 
-    .back-arrow {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 2rem;
-      color: white;
-      text-decoration: none;
-      z-index: 10;
-    }
-	  @media (max-width: 430px) {
-  .nav-bar {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0 1rem;
-  }
+        .feature-row.reverse { flex-direction: row-reverse; }
 
-  .nav-bar li {
-    margin: 0.5rem;
-  }
+        .feature-text { flex: 1; }
 
-  .logo {
-    max-width: 60vw;
-    height: auto;
-  }
+        .feature-text h2 {
+            font-size: clamp(1.8rem, 8vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
 
-  footer {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-  }
+        .feature-text p {
+            font-size: 1.1rem;
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
 
-  footer p {
-    width: 100%;
-  }
-}
+        .feature-image { flex: 1; text-align: center; }
 
-  </style>
+        .feature-image img {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 30px;
+            box-shadow: 0 0 50px rgba(110, 40, 255, 0.2);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .benefit-card {
+            background: #111;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #222;
+        }
+
+        .prototype-section {
+            background-color: #0a0a0a;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .figma-prototype iframe {
+            width: 100%;
+            max-width: 1000px;
+            height: 600px;
+            border: 2px solid #333;
+            border-radius: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .feature-row, .feature-row.reverse { flex-direction: column; text-align: center; }
+            .figma-prototype iframe { height: 450px; }
+        }
+
+        footer {
+            padding: 50px 20px calc(var(--safe-bottom) + 30px);
+            text-align: center;
+            color: #444;
+        }
+    </style>
 </head>
 <body>
-  <a href="PROYECTOS.html" class="back-arrow">←</a>
 
-  <div class="hero-image">
-    <img src="img/scope.png" alt="Imagen Scope" />
-  </div>
+    <button id="btn-idioma">EN</button>
+    <a href="PROYECTOS.html" class="back-arrow">←</a>
 
-  <div class="content-section">
-    <p>
-     <br><br>SCOPE is a comprehensive platform designed to streamline the cinematic experience. It bridges the gap between logistical efficiency and community engagement for movie lovers. <BR>
+    <header class="hero-section">
+        <h1>SCOPE</h1>
+        <p data-key="hero-desc">Una plataforma integral diseñada para optimizar la experiencia cinematográfica.</p>
+    </header>
 
-<STRONG>Smart Aggregation</STRONG>: An intuitive search engine that compares real-time pricing and seating across all local theaters, eliminating the need for multi-site browsing. <BR>
+    <div class="feature-container">
+        <!-- Feature 1 -->
+        <div class="feature-row">
+            <div class="feature-image">
+                <img src="SCOPE.jpeg" alt="Scope App">
+            </div>
+            <div class="feature-text">
+                <span style="color: #ff4d4d; font-weight: bold;" data-key="label-control">Control</span>
+                <h2 data-key="title-agg">Agregación Inteligente</h2>
+                <p data-key="desc-agg">Un motor de búsqueda intuitivo que compara precios y asientos en tiempo real.</p>
+            </div>
+        </div>
 
-<strong>AI Personalization</strong>: Advanced algorithms learn user preferences to provide tailored movie recommendations and "where to stream" alerts for titles no longer in theaters.<BR>
+        <!-- Feature 2 -->
+        <div class="feature-row reverse">
+            <div class="feature-image">
+                <img src="SCOPE_IA.jpeg" alt="AI Features">
+            </div>
+            <div class="feature-text">
+                <span style="color: #a855f7; font-weight: bold;" data-key="label-feat">Características</span>
+                <h2 data-key="title-ai">Personalización por IA</h2>
+                <p data-key="desc-ai">Algoritmos avanzados que aprenden tus preferencias para darte recomendaciones únicas.</p>
+            </div>
+        </div>
 
-<STRONG>Social Ecosystem</STRONG>: A dedicated space for cinephiles to build custom lists, rate films, and connect with other enthusiasts.
-
-Gamified Experience: Includes a personalized "Cinema Map" to track visited locations and explore new ones, alongside community-driven theater rankings. <br> <strong>Created with Figma, 2023</strong> <br>
-        Other sofrtwares such as Adobe Illustrator and Adobe Photoshop.
-    </p>
-
-    <h2>PROTOTYPE</h2>
-
-    <div class="figma-prototype">
-      <!-- Sustituye el src con el link embebido de tu archivo de Figma -->
-      <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/proto/V2vBYGfzdsdfv6dbHOrQKu/SCOPE?scaling=scale-down&content-scaling=fixed&page-id=0%3A1&node-id=209-2231&starting-point-node-id=342%3A3818&embed-host=share" allowfullscreen></iframe> 
+        <!-- Benefits -->
+        <div style="text-align: center; margin-top: 100px;">
+            <span style="color: #f97316; font-weight: bold;" data-key="label-benefits">Beneficios</span>
+            <h2 style="font-size: 2.5rem;" data-key="title-benefits">Todo lo que necesitas para disfrutar del cine</h2>
+        </div>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <h3 data-key="b1-t">Ecosistema Social</h3>
+                <p data-key="b1-p">Un espacio dedicado para cinéfilos.</p>
+            </div>
+            <div class="benefit-card">
+                <h3 data-key="b2-t">Experiencia Gamificada</h3>
+                <p data-key="b2-p">Incluye un "Mapa de Cine" personalizado.</p>
+            </div>
+            <div class="benefit-card">
+                <h3 data-key="b3-t">Creado con Figma</h3>
+                <p data-key="b3-p">Diseñado con herramientas estándar de la industria.</p>
+            </div>
+        </div>
     </div>
-  </div>
 
+    <section class="prototype-section">
+        <h2 data-key="title-proto">PROTOTIPO</h2>
+        <div class="figma-prototype">
+            <iframe src="https://embed.figma.com/proto/V2vBYGfzdsdfv6dbHOrQKu/SCOPE?scaling=scale-down&content-scaling=fixed&page-id=0%3A1&node-id=209-2231&starting-point-node-id=342%3A3818&embed-host=share" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <footer>
+        <p data-key="footer-text">&copy; 2026 Plataforma SCOPE</p>
+    </footer>
+
+    <script>
+        const textos = {
+            es: {
+                "hero-desc": "Una plataforma integral diseñada para optimizar la experiencia cinematográfica. Cierra la brecha entre la eficiencia logística y el compromiso comunitario.",
+                "label-control": "Control",
+                "title-agg": "Agregación Inteligente",
+                "desc-agg": "Un motor de búsqueda intuitivo que compara precios y asientos en tiempo real en todos los cines locales, eliminando la necesidad de navegar por múltiples sitios.",
+                "label-feat": "Características",
+                "title-ai": "Personalización por IA",
+                "desc-ai": "Algoritmos avanzados que aprenden las preferencias del usuario para ofrecer recomendaciones de películas personalizadas y alertas de 'dónde ver'.",
+                "label-benefits": "Beneficios",
+                "title-benefits": "Todo lo que necesitas para disfrutar del cine",
+                "b1-t": "Ecosistema Social",
+                "b1-p": "Un espacio dedicado para que los cinéfilos creen listas personalizadas, califiquen películas y conecten.",
+                "b2-t": "Experiencia Gamificada",
+                "b2-p": "Incluye un 'Mapa de Cine' personalizado para rastrear ubicaciones visitadas y explorar nuevas.",
+                "b3-t": "Creado con Figma",
+                "b3-p": "Diseñado utilizando herramientas estándar de la industria como Adobe Illustrator y Photoshop.",
+                "title-proto": "PROTOTIPO",
+                "footer-text": "© 2026 Plataforma SCOPE - Creado con Figma",
+                "btn-lang": "EN"
+            },
+            en: {
+                "hero-desc": "A comprehensive platform designed to streamline the cinematic experience. Bridges the gap between logistical efficiency and community engagement.",
+                "label-control": "Control",
+                "title-agg": "Smart Aggregation",
+                "desc-agg": "An intuitive search engine that compares real-time pricing and seating across all local theaters, eliminating the need for multi-site browsing.",
+                "label-feat": "Features",
+                "title-ai": "AI Personalization",
+                "desc-ai": "Advanced algorithms learn user preferences to provide tailored movie recommendations and 'where to stream' alerts.",
+                "label-benefits": "Benefits",
+                "title-benefits": "Everything you need to enjoy cinema",
+                "b1-t": "Social Ecosystem",
+                "b1-p": "A dedicated space for cinephiles to build custom lists, rate films, and connect.",
+                "b2-t": "Gamified Experience",
+                "b2-p": "Includes a personalized 'Cinema Map' to track visited locations and explore new ones.",
+                "b3-t": "Created with Figma",
+                "b3-p": "Designed using industry-standard tools like Adobe Illustrator and Photoshop.",
+                "title-proto": "PROTOTYPE",
+                "footer-text": "© 2026 SCOPE Platform - Created with Figma",
+                "btn-lang": "ES"
+            }
+        };
+
+        const btnIdioma = document.getElementById('btn-idioma');
+        let idiomaActual = localStorage.getItem('idiomaPreferido') || 'es';
+
+        function actualizarTextos() {
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const clave = el.getAttribute('data-key');
+                if (textos[idiomaActual][clave]) {
+                    el.innerHTML = textos[idiomaActual][clave];
+                }
+            });
+            btnIdioma.textContent = textos[idiomaActual]["btn-lang"];
+            localStorage.setItem('idiomaPreferido', idiomaActual);
+        }
+
+        btnIdioma.addEventListener('click', () => {
+            idiomaActual = (idiomaActual === 'es') ? 'en' : 'es';
+            actualizarTextos();
+        });
+
+        actualizarTextos();
+    </script>
 </body>
 </html>
-

@@ -2,10 +2,17 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- viewport-fit=cover permite que el fondo use toda la pantalla en iPhones modernos[cite: 1] -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>UN GRAN SALTO</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
   <style>
+    :root {
+      /* Manejo de zonas seguras de iOS[cite: 1] */
+      --safe-top: env(safe-area-inset-top, 20px);
+      --safe-bottom: env(safe-area-inset-bottom, 20px);
+    }
+
     body, html {
       margin: 0;
       padding: 0;
@@ -13,7 +20,27 @@
       background-color: #fff;
       color: #000;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
+
+    /* BOTÓN IDIOMA - Ajustado a Safe Area[cite: 1] */
+    #btn-idioma {
+      position: fixed;
+      top: var(--safe-top);
+      right: 20px;
+      z-index: 100;
+      background: white;
+      color: black;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+    #btn-idioma:hover { background: #000; color: #fff; }
 
     .hero {
       width: 100%;
@@ -26,19 +53,22 @@
 
     .hero h1 {
       position: absolute;
-      bottom: 40px;
+      bottom: 60px;
       width: 100%;
       text-align: center;
-      font-size: clamp(3rem, 10vw, 10rem); /* Tamaño adaptable */
+      font-size: clamp(2.5rem, 10vw, 8rem);
       font-weight: 900;
       margin: 0;
       color: white;
       text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      padding: 0 20px;
+      box-sizing: border-box;
     }
 
+    /* FLECHA - Ajustada a Safe Area[cite: 1] */
     .back-arrow {
       position: absolute;
-      top: 20px;
+      top: var(--safe-top);
       left: 20px;
       font-size: 2.5rem;
       color: white;
@@ -47,18 +77,17 @@
     }
 
     .contenido {
-      padding: 4rem 2rem;
+      padding: 4rem 1.5rem;
       max-width: 1200px;
       margin: 0 auto;
       font-weight: 400;
       line-height: 1.6;
     }
 
-    /* SECCIÓN IMÁGENES FINALES (MÁS GRANDES) */
     .imagenes-finales {
       background: white;
       color: black;
-      padding: 2rem 0; /* Menos padding para dar espacio a la imagen */
+      padding: 2rem 0;
       width: 100vw;
       min-height: 100vh;
       display: flex;
@@ -67,24 +96,24 @@
     }
 
     .imagenes-finales h2 {
-      font-size: 3rem;
+      font-size: clamp(1.8rem, 5vw, 3rem);
       margin-bottom: 2rem;
       text-align: center;
     }
 
     .carousel {
-      width: 95vw; /* Casi todo el ancho */
-      height: 85vh; /* Casi todo el alto disponible */
+      width: 95vw;
+      height: clamp(300px, 70vh, 85vh);
       overflow: hidden;
       position: relative;
-      background: #000; /* Fondo negro para que resalte el espacio */
-      border-radius: 10px;
+      background: #000;
+      border-radius: 15px;
     }
 
     .carousel img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Cambiado de contain a cover para llenar todo el recuadro */
+      object-fit: cover;
       position: absolute;
       opacity: 0;
       transition: opacity 1s ease-in-out;
@@ -98,17 +127,17 @@
     .final-section {
       background: white;
       text-align: center;
-      padding: 6rem 2rem;
+      padding: 6rem 1.5rem calc(var(--safe-bottom) + 3rem);
     }
 
     .final-section h1 {
-      font-size: 5rem;
+      font-size: clamp(2.5rem, 8vw, 5rem);
       font-weight: 900;
       margin-bottom: 2rem;
     }
 
     .final-section p {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       max-width: 800px;
       margin: 0 auto 3rem auto;
     }
@@ -123,33 +152,34 @@
       transform: scale(1.1);
     }
 
-    /* Ajuste para móviles */
     @media (max-width: 768px) {
-      .hero h1 { font-size: 4rem; }
-      .carousel { height: 60vh; width: 100vw; border-radius: 0; }
-      .final-section h1 { font-size: 3rem; }
+      .hero h1 { bottom: 40px; }
+      .carousel { width: 100vw; border-radius: 0; }
+      .contenido { padding: 3rem 1.5rem; text-align: center; }
     }
   </style>
 </head>
 <body>
 
+  <button id="btn-idioma">EN</button>
+
   <div class="hero">
     <a href="PROYECTOS.html" class="back-arrow">←</a>
-    <h1>UN GRAN SALTO</h1>
+    <h1 data-key="hero-title">UN GRAN SALTO</h1>
   </div>
 
   <div class="contenido">
     <p>
-      <strong>SHORT FILM ANIMATION</strong> <br> <br>
-      <strong>TITLE:</strong> UN GRAN SALTO <br>
-      <strong>CREATED BY:</strong> ARANZA ESPINOSA <br>
-      <strong>SOFTWARES:</strong> BLENDER, AFTER EFFECTS <br>
-      <strong>YEAR:</strong> 2023
+      <strong data-key="tech-type">CORTOMETRAJE DE ANIMACIÓN</strong> <br> <br>
+      <strong data-key="tech-title-label">TÍTULO:</strong> UN GRAN SALTO <br>
+      <strong data-key="tech-creator-label">CREADO POR:</strong> ARANZA ESPINOSA <br>
+      <strong data-key="tech-soft-label">SOFTWARES:</strong> BLENDER, AFTER EFFECTS <br>
+      <strong data-key="tech-year-label">AÑO:</strong> 2023
     </p>
   </div>
 
   <section class="imagenes-finales">
-    <h2>FINAL IMAGES</h2>
+    <h2 data-key="section-final-images">IMÁGENES FINALES</h2>
     <div class="carousel">
       <img src="img/IMG_2785.JPG" class="active">
       <img src="IMG_2787.JPG">
@@ -158,9 +188,9 @@
   </section>
 
   <section class="final-section">
-    <h1>THANKS!</h1>
-    <p>"Un gran salto" represents a sci-fi history scene, in which an astronaut makes the biggest step of human history.</p>
-    <h2>SHORTFILM</h2>
+    <h1 data-key="thanks">¡GRACIAS!</h1>
+    <p data-key="final-desc">"Un gran salto" representa una escena de historia de ciencia ficción, en la que un astronauta da el paso más grande de la historia de la humanidad.</p>
+    <h2 data-key="shortfilm-label">CORTOMETRAJE</h2>
     <div class="final-icons">
       <a href="https://www.behance.net/gallery/193257111/Un-gran-salto" target="_blank">
         <img src="descarga (4).jpg" alt="Behance">
@@ -169,17 +199,69 @@
   </section>
 
   <script>
+    /* CAROUSEL */
     let index = 0;
     const images = document.querySelectorAll('.carousel img');
 
     function nextImage() {
+      if (images.length === 0) return;
       images[index].classList.remove('active');
       index = (index + 1) % images.length;
       images[index].classList.add('active');
     }
 
     setInterval(nextImage, 4000);
-  </script>
 
+    /* TRADUCCIÓN */
+    const textos = {
+      es: {
+        "hero-title": "UN GRAN SALTO",
+        "tech-type": "CORTOMETRAJE DE ANIMACIÓN",
+        "tech-title-label": "TÍTULO:",
+        "tech-creator-label": "CREADO POR:",
+        "tech-soft-label": "SOFTWARES:",
+        "tech-year-label": "AÑO:",
+        "section-final-images": "IMÁGENES FINALES",
+        "thanks": "¡GRACIAS!",
+        "final-desc": "\"Un gran salto\" representa una escena de historia de ciencia ficción, en la que un astronauta da el paso más grande de la historia de la humanidad.",
+        "shortfilm-label": "CORTOMETRAJE",
+        "btn-lang": "EN"
+      },
+      en: {
+        "hero-title": "A GREAT LEAP",
+        "tech-type": "ANIMATION SHORT FILM",
+        "tech-title-label": "TITLE:",
+        "tech-creator-label": "CREATED BY:",
+        "tech-soft-label": "SOFTWARES:",
+        "tech-year-label": "YEAR:",
+        "section-final-images": "FINAL IMAGES",
+        "thanks": "THANKS!",
+        "final-desc": "\"A Great Leap\" represents a sci-fi history scene, in which an astronaut makes the biggest step of human history.",
+        "shortfilm-label": "SHORT FILM",
+        "btn-lang": "ES"
+      }
+    };
+
+    const btnIdioma = document.getElementById('btn-idioma');
+    let idiomaActual = localStorage.getItem('idiomaPreferido') || 'es';
+
+    function actualizarTextos() {
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const clave = el.getAttribute('data-key');
+        if (textos[idiomaActual][clave]) {
+          el.innerHTML = textos[idiomaActual][clave];
+        }
+      });
+      btnIdioma.textContent = textos[idiomaActual]["btn-lang"];
+      localStorage.setItem('idiomaPreferido', idiomaActual);
+    }
+
+    btnIdioma.addEventListener('click', () => {
+      idiomaActual = (idiomaActual === 'es') ? 'en' : 'es';
+      actualizarTextos();
+    });
+
+    actualizarTextos();
+  </script>
 </body>
 </html>

@@ -2,10 +2,17 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GURACHA</title>
+    <!-- Viewport-fit=cover es clave para usar toda la pantalla en iPhones modernos[cite: 1] -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>GUARACHA</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+        :root {
+            /* Variables para manejar las zonas seguras de iOS[cite: 1] */
+            --safe-top: env(safe-area-inset-top, 20px);
+            --safe-bottom: env(safe-area-inset-bottom, 20px);
+        }
 
         * {
             margin: 0;
@@ -18,31 +25,46 @@
             background-color: #000;
             font-family: 'Inter', sans-serif;
             color: white;
-            overflow-x: hidden;
+            overflow: hidden; /* Evita doble scroll */
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Flecha de regreso */
+        /* BOTÓN IDIOMA - Ajustado a Safe Area[cite: 1] */
+        #btn-idioma {
+            position: fixed;
+            top: var(--safe-top);
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            color: black;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+            transition: 0.3s;
+        }
+
+        /* Flecha de regreso ajustada[cite: 1] */
         .back-nav {
             position: fixed;
-            top: 30px;
-            left: 30px;
-            z-index: 100;
+            top: var(--safe-top);
+            left: 20px;
+            z-index: 1000;
             text-decoration: none;
             color: white;
             font-size: 1.5rem;
             display: flex;
             align-items: center;
-            transition: opacity 0.3s;
-        }
-
-        .back-nav:hover {
-            opacity: 0.7;
         }
 
         .container {
             height: 100vh;
             scroll-snap-type: y mandatory;
             overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
         }
 
         .page {
@@ -55,26 +77,25 @@
             align-items: center;
             position: relative;
             padding: 20px;
-            overflow: hidden;
+            padding-top: calc(var(--safe-top) + 20px);
+            padding-bottom: calc(var(--safe-bottom) + 20px);
         }
 
         .grid-layout {
             display: grid;
-            gap: 15px;
+            gap: 10px;
             width: 100%;
             max-width: 1100px;
             height: 60vh;
             z-index: 2;
         }
 
-        /* Ajuste Alexia: Reducción de escala para visibilidad total */
         .alexia-grid {
             display: grid;
-            gap: 10px;
-            width: 80%; /* Reducido para asegurar margen */
-            max-width: 600px; /* Tamaño más pequeño para que quepan las 4 */
+            gap: 8px;
+            width: 90%;
+            max-width: 600px;
             grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
             z-index: 2;
         }
 
@@ -82,134 +103,126 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            background: transparent;
         }
 
         .carousel-container {
             width: 100%;
             max-width: 850px; 
-            height: 65vh;
+            height: 60vh;
             position: relative;
             z-index: 2;
         }
 
         .carousel-container img {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             object-fit: contain;
             opacity: 0;
             transition: opacity 0.8s ease-in-out;
         }
 
-        .carousel-container img.active {
-            opacity: 1;
-        }
+        .carousel-container img.active { opacity: 1; }
 
         .full-img-contained {
             max-width: 90%;
-            max-height: 60vh;
+            max-height: 50vh;
             object-fit: contain;
-            z-index: 1;
-        }
-
-        .content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            width: 100%;
         }
 
         h1 {
             font-weight: 900;
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: clamp(2rem, 10vw, 5rem);
             text-transform: uppercase;
             letter-spacing: -2px;
             line-height: 0.9;
+            text-align: center;
         }
 
         .label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #aaa;
             margin: 10px 0;
+            text-align: center;
         }
 
         .side-text {
             position: absolute;
-            left: 10px;
+            left: 5px;
             top: 50%;
             transform: translateY(-50%) rotate(-90deg);
-            font-size: 0.6rem;
-            letter-spacing: 4px;
-            opacity: 0.6;
+            font-size: 0.5rem;
+            letter-spacing: 3px;
+            opacity: 0.5;
+            white-space: nowrap;
         }
 
-        /* Reorganización última página: Mitad imagen, mitad texto */
         .split-page {
             display: flex;
-            flex-direction: row;
             width: 100%;
             height: 100%;
-
-            padding: 0;
         }
 
-        .split-left {
-            width: 50%;
-            height: 100%;
-        }
-
-        .split-left img {
-            width: 50%;
-            height: 50%;
-            object-fit:contain;
+        .split-left, .split-right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
         .split-right {
-            width: 50%;
-            height: 100%;
-            display: flex;
             flex-direction: column;
-            justify-content: center;
-            padding: 60px;
+            padding: 40px;
             background-color: #000;
+            text-align: left;
         }
 
         .dedicatoria-text {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            font-weight: 400;
-            color: #fff;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        /* Ajustes específicos para móviles (iPhone 13+)[cite: 1] */
+        @media (max-width: 768px) {
+            .split-page { flex-direction: column; }
+            .split-left, .split-right { height: 50%; width: 100%; }
+            .split-right { padding: 20px; text-align: center; }
+            .side-text { display: none; } /* Limpieza visual en móvil */
+            .grid-layout { grid-template-columns: 1fr !important; height: auto; gap: 5px; }
+            .grid-layout img { height: 20vh; }
         }
     </style>
 </head>
 <body>
 
+<button id="btn-idioma">EN</button>
 <a href="PROYECTOS.html" class="back-nav">←</a>
 
 <div class="container">
 
+    <!-- Page 1: Hero -->
     <section class="page">
         <div class="content">
-            <p class="label">La</p>
+            <p class="label" data-key="hero-small">La</p>
             <h1>Guaracha</h1>
-            <p class="label">LATINOAMÉRICA & MADRID / 2025</p>
+            <p class="label" data-key="hero-location">LATINOAMÉRICA & MADRID / 2025</p>
         </div>
     </section>
 
+    <!-- Page 2: Instrument -->
     <section class="page">
         <div class="grid-layout" style="grid-template-columns: repeat(3, 1fr);">
             <img src="img/ARANZA_ESPINOSA_4.jpg" alt="DJ 1">
             <img src="img/ARANZA_ESPINOSA_5.jpg" alt="DJ 2">
             <img src="img/ARANZA_ESPINOSA_6.jpg" alt="DJ 3">
         </div>
-        <p class="label">PIONEER DJ / INSTRUMENTO</p>
+        <p class="label" data-key="label-instrument">PIONEER DJ / INSTRUMENTO</p>
     </section>
 
+    <!-- Page 3: Infrababy -->
     <section class="page">
         <div class="side-text">INFRABABY</div>
         <div class="grid-layout" style="grid-template-columns: repeat(3, 1fr);">
@@ -219,6 +232,7 @@
         </div>
     </section>
 
+    <!-- Page 4: Alexia -->
     <section class="page">
         <div class="side-text">ALEXIA</div>
         <div class="alexia-grid">
@@ -227,9 +241,10 @@
             <img src="img/ARANZA_ESPINOSA_10.jpg">
             <img src="img/ARANZA_ESPINOSA_8.jpg">
         </div>
-        <p class="label" style="margin-top: 15px;">FOTOGRAFÍA ANALÓGICA</p>
+        <p class="label" style="margin-top: 15px;" data-key="label-analog">FOTOGRAFÍA ANALÓGICA</p>
     </section>
 
+    <!-- Page 5: Carousel -->
     <section class="page">
         <div class="carousel-container" id="carousel">
             <img src="img/ARANZA_ESPINOSA_16.jpg" class="active">
@@ -243,27 +258,29 @@
             <img src="img/ARANZA_ESPINOSA_18.jpg">
             <img src="img/ARANZA_ESPINOSA_19.jpg">
         </div>
-        <p class="label">PROYECTO COMPLETO 2025</p>
+        <p class="label" data-key="label-project">PROYECTO COMPLETO 2025</p>
     </section>
 
+    <!-- Page 6: Palestine -->
     <section class="page">
         <img src="img/ARANZA_ESPINOSA_20.jpg" class="full-img-contained">
         <div class="content">
-            <h2 style="font-size: 2.2rem; margin-top: 20px;">FREE PALESTINE</h2>
-            <p class="label">STOP GENOCIDE</p>
+            <h2 style="font-size: 1.8rem; margin-top: 20px;" data-key="palestine-h2">PALESTINA LIBRE</h2>
+            <p class="label" data-key="palestine-label">ALTO AL GENOCIDIO</p>
         </div>
     </section>
 
+    <!-- Page 7: Final -->
     <section class="page" style="padding: 0;">
         <div class="split-page">
             <div class="split-left">
-                <img src="img/ARANZA_ESPINOSA_2.jpg" alt="Final Image">
+                <img src="img/ARANZA_ESPINOSA_2.jpg" alt="Final Image" style="width:80%; height:80%; object-fit:contain;">
             </div>
             <div class="split-right">
               <div class="dedicatoria-text">
-                <p class="label" style="text-align: left;">Para todx potra</p>
-                  <p>DE ARANZA ESPINOSA</p>
-                </div>
+                <p class="label" style="text-align: left;" data-key="final-dedication">Para todx potra</p>
+                <p data-key="final-author" style="font-weight:900;">DE ARANZA ESPINOSA</p>
+              </div>
             </div>
         </div>
     </section>
@@ -271,16 +288,67 @@
 </div>
 
 <script>
-    const images = document.querySelectorAll('#carousel img');
+    /* CAROUSEL */
+    const carouselImages = document.querySelectorAll('#carousel img');
     let currentIndex = 0;
 
     function nextImage() {
-        images[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % images.length;
-        images[currentIndex].classList.add('active');
+        if(carouselImages.length === 0) return;
+        carouselImages[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % carouselImages.length;
+        carouselImages[currentIndex].classList.add('active');
     }
 
     setInterval(nextImage, 5000);
+
+    /* TRADUCCIÓN[cite: 1] */
+    const textos = {
+        es: {
+            "hero-small": "La",
+            "hero-location": "LATINOAMÉRICA & MADRID / 2025",
+            "label-instrument": "PIONEER DJ / INSTRUMENTO",
+            "label-analog": "FOTOGRAFÍA ANALÓGICA",
+            "label-project": "PROYECTO COMPLETO 2025",
+            "palestine-h2": "PALESTINA LIBRE",
+            "palestine-label": "ALTO AL GENOCIDIO",
+            "final-dedication": "Para todx potra",
+            "final-author": "DE ARANZA ESPINOSA",
+            "btn-lang": "EN"
+        },
+        en: {
+            "hero-small": "The",
+            "hero-location": "LATIN AMERICA & MADRID / 2025",
+            "label-instrument": "PIONEER DJ / INSTRUMENT",
+            "label-analog": "ANALOG PHOTOGRAPHY",
+            "label-project": "FULL PROJECT 2025",
+            "palestine-h2": "FREE PALESTINE",
+            "palestine-label": "STOP GENOCIDE",
+            "final-dedication": "For every baddie",
+            "final-author": "BY ARANZA ESPINOSA",
+            "btn-lang": "ES"
+        }
+    };
+
+    const btnIdioma = document.getElementById('btn-idioma');
+    let idiomaActual = localStorage.getItem('idiomaPreferido') || 'es';
+
+    function actualizarTextos() {
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const clave = el.getAttribute('data-key');
+            if(textos[idiomaActual][clave]){
+                el.innerHTML = textos[idiomaActual][clave];
+            }
+        });
+        btnIdioma.textContent = textos[idiomaActual]["btn-lang"];
+        localStorage.setItem('idiomaPreferido', idiomaActual);
+    }
+
+    btnIdioma.addEventListener('click', () => {
+        idiomaActual = (idiomaActual === 'es') ? 'en' : 'es';
+        actualizarTextos();
+    });
+
+    actualizarTextos();
 </script>
 
 </body>

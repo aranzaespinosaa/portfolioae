@@ -2,10 +2,17 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- viewport-fit=cover es crucial para que el fondo use toda la pantalla en iPhones modernos[cite: 1] -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>OSHI | Proyecto</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Barrio&display=swap" rel="stylesheet">
   <style>
+    :root {
+      /* Variables para manejar las zonas de la cámara y bordes redondeados[cite: 1] */
+      --safe-top: env(safe-area-inset-top, 20px);
+      --safe-bottom: env(safe-area-inset-bottom, 20px);
+    }
+
     body, html {
       margin: 0;
       padding: 0;
@@ -15,7 +22,27 @@
 
     body {
       cursor: url('stroke.png'), auto;
+      -webkit-font-smoothing: antialiased;
     }
+
+    /* BOTÓN IDIOMA FLOTANTE - Ajustado a Safe Area[cite: 1] */
+    #btn-idioma {
+      position: fixed;
+      top: var(--safe-top);
+      right: 20px;
+      z-index: 100;
+      background: #00B6C9;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(0, 182, 201, 0.3);
+      transition: 0.3s;
+    }
+    #btn-idioma:hover { background: #008fa0; transform: scale(1.05); }
 
     .hero {
       width: 100%;
@@ -26,9 +53,10 @@
       position: relative;
     }
 
+    /* Flecha de regreso ajustada para no quedar bajo el notch[cite: 1] */
     .back-arrow {
       position: absolute;
-      top: 20px;
+      top: var(--safe-top);
       left: 20px;
       font-size: 2.5rem;
       color: white;
@@ -39,11 +67,10 @@
     .contenido {
       padding: 4rem 2rem;
       max-width: 1200px;
-      margin-left: 2rem;
+      margin: 0 auto;
       font-weight: 400;
     }
 
-    /* --- SECCIÓN TRAILER AJUSTADA PARA CUBRIR TODO --- */
     .trailer-section {
       background: white;
       padding: 6rem 0;
@@ -54,13 +81,13 @@
 
     .trailer-section h2 {
       font-family: 'Barrio', cursive;
-      font-size: 4rem;
+      font-size: clamp(2.5rem, 8vw, 4rem);
       color: #00B6C9;
       margin-bottom: 3rem;
     }
 
     .video-wrapper {
-      width: 95%;
+      width: 90%;
       max-width: 1200px;
       margin: 0 auto;
       aspect-ratio: 16 / 9;
@@ -78,11 +105,10 @@
       width: 100%;
       height: 100%;
       border: none;
-      /* Escala ligera para asegurar que no queden bordes negros por redondeo */
       transform: scale(1.01); 
     }
 
-    /* SECCIÓN NARRATIVE (BLOQUE DOS) */
+    /* SECCIÓN NARRATIVE AJUSTADA PARA MÓVIL */
     .bloque-dos {
       background: url('worlddddd (1).png') no-repeat center center/cover;
       color: white;
@@ -99,7 +125,7 @@
       grid-column: 1 / 2;
       grid-row: 1;
       font-family: 'Barrio', cursive;
-      font-size: 7rem;
+      font-size: clamp(3rem, 10vw, 7rem);
       margin: 0;
       text-align: left;
       color: white;
@@ -110,7 +136,7 @@
       grid-row: 2;
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
-      font-size: 1.8rem;
+      font-size: clamp(1.1rem, 3vw, 1.8rem);
       max-width: 600px;
       text-align: right; 
       align-self: center;
@@ -119,32 +145,32 @@
       line-height: 1.4;
     }
 
-    /* SECCIÓN IMÁGENES FINALES */
     .imagenes-finales {
       background: white;
       color: #00B6C9;
       padding: 4rem 0;
       width: 100vw;
-      min-height: 110vh;
+      min-height: 100vh;
       text-align: center;
     }
 
     .imagenes-finales h2 {
       font-family: 'Barrio', cursive;
-      font-size: 4rem;
+      font-size: clamp(2.5rem, 8vw, 4rem);
       margin-bottom: 2rem;
       color: #00B6C9;
     }
 
     .carousel {
       width: 95vw;
-      height: 85vh;
+      height: 70vh;
       margin: 0 auto;
       overflow: hidden;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 15px;
     }
 
     .carousel img {
@@ -157,27 +183,24 @@
       pointer-events: none;
     }
 
-    .carousel img.active {
-      opacity: 1;
-    }
+    .carousel img.active { opacity: 1; }
 
-    /* SECCIÓN FINAL */
     .final-section {
       background: white;
       text-align: center;
-      padding: 6rem 2rem;
+      padding: 6rem 2rem calc(var(--safe-bottom) + 4rem);
     }
 
     .final-section h1 {
       font-family: 'Barrio', cursive;
       color: #00B6C9;
-      font-size: 5rem;
+      font-size: clamp(3rem, 10vw, 5rem);
       margin-bottom: 2rem;
     }
 
     .final-section p {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: black;
       margin: 0 auto 4rem auto;
       max-width: 900px;
@@ -188,11 +211,12 @@
       display: flex;
       justify-content: center;
       gap: 3rem;
+      flex-wrap: wrap;
     }
 
     .final-icons img {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
     }
 
     @media (max-width: 768px) {
@@ -200,16 +224,20 @@
         display: flex;
         flex-direction: column;
         padding: 2rem;
+        padding-top: 4rem;
+        text-align: center;
       }
-      .bloque-dos .titulo { font-size: 4rem; }
-      .bloque-dos .parrafo { font-size: 1.2rem; text-align: left; }
+      .bloque-dos .titulo { text-align: center; margin-bottom: 2rem; }
+      .bloque-dos .parrafo { text-align: center; justify-self: center; font-size: 1.2rem; }
       .carousel { height: 50vh; }
-      .trailer-section h2 { font-size: 3rem; }
       .video-wrapper { width: 100%; border-radius: 0; }
+      .contenido { margin-left: 0; padding: 2rem 1.5rem; text-align: center; }
     }
   </style>
 </head>
 <body>
+
+  <button id="btn-idioma">EN</button>
 
   <div class="hero">
     <a href="PROYECTOS.html" class="back-arrow">←</a>
@@ -217,16 +245,16 @@
 
   <div class="contenido">
     <p>
-      <strong>SHORT FILM ANIMATION</strong> <br> <br>
-      <strong>TITLE:</strong> OSHI<br>
-      <strong>CREATED BY:</strong> ARANZA ESPINOSA <br>
-      <strong>SOFTWARES:</strong> BLENDER, ADOBE AFTER EFFECTS, ADOBE PHOTOSHOP, <br> ELEVENLABS.IA, ADOBE PREMIERE <BR>
-      <strong>YEAR:</strong> 2025
+      <strong data-key="tech-type">CORTOMETRAJE DE ANIMACIÓN</strong> <br> <br>
+      <strong data-key="tech-title-label">TÍTULO:</strong> OSHI<br>
+      <strong data-key="tech-creator-label">CREADO POR:</strong> ARANZA ESPINOSA <br>
+      <strong data-key="tech-soft-label">SOFTWARES:</strong> BLENDER, ADOBE AFTER EFFECTS, ADOBE PHOTOSHOP, <br> ELEVENLABS.IA, ADOBE PREMIERE <BR>
+      <strong data-key="tech-year-label">AÑO:</strong> 2025
     </p>
   </div>
 
   <section class="trailer-section">
-    <h2>TRAILER</h2>
+    <h2 data-key="section-trailer">TRÁILER</h2>
     <div class="video-wrapper">
       <iframe 
         src="https://www.youtube.com/embed/iYUG5gkhjps?rel=0&modestbranding=1&vq=hd1080" 
@@ -238,14 +266,14 @@
   </section>
 
   <section class="bloque-dos">
-    <h2 class="titulo">STORY</h2>
-    <p class="parrafo">
-      OSHI is an experimental and symbolic short film that portrays the experience of a child with autism facing anxiety and sensory overload. Through a small bear living in a white world that gradually transforms into chaos, the story conveys the vital need for empathy and acceptance.
+    <h2 class="titulo" data-key="story-title">HISTORIA</h2>
+    <p class="parrafo" data-key="story-desc">
+      OSHI es un cortometraje experimental y simbólico que retrata la experiencia de un niño con autismo enfrentando la ansiedad y la sobrecarga sensorial. A través de un pequeño oso que vive en un mundo blanco que se transforma gradualmente en caos, la historia transmite la necesidad vital de empatía y aceptación.
     </p>
   </section>
 
   <section class="imagenes-finales">
-    <h2>FINAL IMAGES</h2>
+    <h2 data-key="section-final-images">IMÁGENES FINALES</h2>
     <div class="carousel">
       <img src="0053.png" class="active">
       <img src="0041.png">
@@ -259,11 +287,11 @@
   </section>
 
   <section class="final-section">
-    <h1>DEVELOPMENT</h1>
-    <p>As the sole creator of the project, I was responsible for the entire creative process. I developed the original story and designed the storyboard, establishing a unique aesthetic inspired by anime. To bring this vision to life, I combined 3D and 2D animation techniques, crafting a visual language that balances technical precision with deep emotional resonance.<br><br>
-    <strong>OSHI in essence, is an invitation to see the world with a new perspective.</strong></p>
+    <h1 data-key="dev-title">DESARROLLO</h1>
+    <p data-key="dev-desc">Como única creadora del proyecto, fui responsable de todo el proceso creativo. Desarrollé la historia original y diseñé el guion gráfico (storyboard), estableciendo una estética única inspirada en el anime. Para dar vida a esta visión, combiné técnicas de animación 3D y 2D, creando un lenguaje visual que equilibra la precisión técnica con una profunda resonancia emocional.<br><br>
+    <strong data-key="dev-quote">OSHI en esencia, es una invitación a ver el mundo con una nueva perspectiva.</strong></p>
     
-    <h2>SHORTFILM</h2>
+    <h2 data-key="shortfilm-label">CORTOMETRAJE</h2>
     <div class="final-icons">
       <a href="https://youtu.be/p4IUJmvuvUM" target="_blank"><img src="descarga (5).jpg" alt="YouTube"></a>
       <a href="https://www.behance.net/gallery/227221007/OSHI" target="_blank"><img src="descarga (4).jpg" alt="Behance"></a>
@@ -275,13 +303,69 @@
     const images = document.querySelectorAll('.carousel img');
 
     function nextImage() {
+      if(images.length === 0) return;
       images[index].classList.remove('active');
       index = (index + 1) % images.length;
       images[index].classList.add('active');
     }
 
     setInterval(nextImage, 4000);
-  </script>
 
+    const textos = {
+      es: {
+        "tech-type": "CORTOMETRAJE DE ANIMACIÓN",
+        "tech-title-label": "TÍTULO:",
+        "tech-creator-label": "CREADO POR:",
+        "tech-soft-label": "SOFTWARES:",
+        "tech-year-label": "AÑO:",
+        "section-trailer": "TRÁILER",
+        "story-title": "HISTORIA",
+        "story-desc": "OSHI es un cortometraje experimental y simbólico que retrata la experiencia de un niño con autismo enfrentando la ansiedad y la sobrecarga sensorial. A través de un pequeño oso que vive en un mundo blanco que se transforma gradualmente en caos, la historia transmite la necesidad vital de empatía y aceptación.",
+        "section-final-images": "IMÁGENES FINALES",
+        "dev-title": "DESARROLLO",
+        "dev-desc": "Como única creadora del proyecto, fui responsable de todo el proceso creativo. Desarrollé la historia original y diseñé el guion gráfico (storyboard), estableciendo una estética única inspirada en el anime. Para dar vida a esta visión, combiné técnicas de animación 3D y 2D, creando un lenguaje visual que equilibra la precisión técnica con una profunda resonancia emocional.",
+        "dev-quote": "OSHI en esencia, es una invitación a ver el mundo con una nueva perspectiva.",
+        "shortfilm-label": "CORTOMETRAJE",
+        "btn-lang": "EN"
+      },
+      en: {
+        "tech-type": "ANIMATION SHORT FILM",
+        "tech-title-label": "TITLE:",
+        "tech-creator-label": "CREATED BY:",
+        "tech-soft-label": "SOFTWARES:",
+        "tech-year-label": "YEAR:",
+        "section-trailer": "TRAILER",
+        "story-title": "STORY",
+        "story-desc": "OSHI is an experimental and symbolic short film that portrays the experience of a child with autism facing anxiety and sensory overload. Through a small bear living in a white world that gradually transforms into chaos, the story conveys the vital need for empathy and acceptance.",
+        "section-final-images": "FINAL IMAGES",
+        "dev-title": "DEVELOPMENT",
+        "dev-desc": "As the sole creator of the project, I was responsible for the entire creative process. I developed the original story and designed the storyboard, establishing a unique aesthetic inspired by anime. To bring this vision to life, I combined 3D and 2D animation techniques, crafting a visual language that balances technical precision with deep emotional resonance.",
+        "dev-quote": "OSHI in essence, is an invitation to see the world with a new perspective.",
+        "shortfilm-label": "SHORT FILM",
+        "btn-lang": "ES"
+      }
+    };
+
+    const btnIdioma = document.getElementById('btn-idioma');
+    let idiomaActual = localStorage.getItem('idiomaPreferido') || 'es';
+
+    function actualizarTextos() {
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const clave = el.getAttribute('data-key');
+        if(textos[idiomaActual][clave]) {
+          el.innerHTML = textos[idiomaActual][clave];
+        }
+      });
+      btnIdioma.textContent = textos[idiomaActual]["btn-lang"];
+      localStorage.setItem('idiomaPreferido', idiomaActual);
+    }
+
+    btnIdioma.addEventListener('click', () => {
+      idiomaActual = (idiomaActual === 'es') ? 'en' : 'es';
+      actualizarTextos();
+    });
+
+    actualizarTextos();
+  </script>
 </body>
 </html>

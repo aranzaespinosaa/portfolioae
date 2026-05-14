@@ -2,21 +2,49 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- viewport-fit=cover es esencial para usar toda la pantalla en iPhones modernos[cite: 1] -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Modelado 3D</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      /* Manejo de zonas seguras de iOS[cite: 1] */
+      --safe-top: env(safe-area-inset-top, 20px);
+      --safe-bottom: env(safe-area-inset-bottom, 20px);
+    }
+
     body {
       margin: 0;
       background-color: black;
       color: white;
       font-family: 'Montserrat', sans-serif;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* BOTÓN IDIOMA - Ajustado a Safe Area[cite: 1] */
+    #btn-idioma {
+      position: fixed;
+      top: var(--safe-top);
+      right: 20px;
+      z-index: 100;
+      background: white;
+      color: black;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+      transition: 0.3s;
+    }
+    #btn-idioma:hover { background: #555; color: #fff; }
+
+    /* FLECHA - Ajustada a Safe Area[cite: 1] */
     .back-arrow {
       position: absolute;
-      top: 20px;
+      top: var(--safe-top);
       left: 20px;
       font-size: 2rem;
       color: white;
@@ -26,20 +54,27 @@
 
     h1 {
       text-align: center;
-      font-size: 4rem;
+      font-size: clamp(2rem, 10vw, 4rem);
       font-weight: 900;
-      margin-top: 80px;
+      margin-top: calc(var(--safe-top) + 60px);
+      padding: 0 1rem;
     }
 
     .carousel-container {
       position: relative;
-      max-width: 90%;
-      margin: 4rem auto;
+      max-width: 95%;
+      margin: 2rem auto;
       text-align: center;
     }
 
     .carousel-slide {
       display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .carousel-slide.active {
@@ -48,69 +83,55 @@
 
     .carousel-image {
       width: 100%;
-      max-height: 600px;
+      height: auto;
+      max-height: 70vh; /* Ajustado para que quepa bien en pantalla vertical */
       object-fit: contain;
       margin-bottom: 1rem;
     }
 
     .carousel-caption {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 400;
+      line-height: 1.5;
+      padding: 0 1.5rem;
+      color: #ccc;
     }
 
     .arrow {
       position: absolute;
-      top: 50%;
+      top: 40%; /* Movido un poco hacia arriba para no tapar el texto en móvil */
       transform: translateY(-50%);
-      font-size: 3rem;
+      font-size: clamp(2rem, 8vw, 3.5rem);
       color: white;
       cursor: pointer;
       user-select: none;
       z-index: 5;
-      padding: 0 1rem;
+      background: rgba(0,0,0,0.3);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .arrow.left {
-      left: 0;
+    .arrow.left { left: 5px; }
+    .arrow.right { right: 5px; }
+
+    @media (max-width: 768px) {
+      .carousel-container { margin: 1rem auto; }
+      .carousel-image { max-height: 55vh; }
+      .arrow { width: 40px; height: 40px; }
+      footer { padding-bottom: var(--safe-bottom); }
     }
-
-    .arrow.right {
-      right: 0;
-    }
-	  @media (max-width: 430px) {
-  .nav-bar {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0 1rem;
-  }
-
-  .nav-bar li {
-    margin: 0.5rem;
-  }
-
-  .logo {
-    max-width: 60vw;
-    height: auto;
-  }
-
-  footer {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-  }
-
-  footer p {
-    width: 100%;
-  }
-}
-
   </style>
 </head>
 <body>
 
+  <button id="btn-idioma">EN</button>
   <a href="PROYECTOS.html" class="back-arrow">←</a>
 
-  <h1>3D MODELS</h1>
+  <h1 data-key="main-title">MODELADO 3D</h1>
 
   <div class="carousel-container">
     <div class="arrow left" onclick="changeSlide(-1)">‹</div>
@@ -118,50 +139,57 @@
 
     <div class="carousel-slide active">
       <img src="img/537f60d2-435d-4994-b5bd-8bbe04a06641.jpg" alt="Modelo 1" class="carousel-image" />
-      <p class="carousel-caption">Render scene of "Rick and Morty" <BR><strong>All rights reserved</strong></p>
+      <p class="carousel-caption" data-key="cap-rick">Escena renderizada de "Rick y Morty" <BR><strong>Todos los derechos reservados</strong></p>
     </div>
 
     <div class="carousel-slide">
       <img src="876ff894-8eef-4909-aad0-f2e95e15e1d8.jpg" alt="Modelo 2" class="carousel-image" />
-      <p class="carousel-caption">Render scene of "Rick and Morty" <BR><strong>All rights reserved</strong></p>
+      <p class="carousel-caption" data-key="cap-rick">Escena renderizada de "Rick y Morty" <BR><strong>Todos los derechos reservados</strong></p>
     </div>
 
     <div class="carousel-slide">
       <img src="dae6156f-15a6-42b4-ba75-820896679f41.jpg" alt="Modelo 3" class="carousel-image" />
-      <p class="carousel-caption">Render scene of "Rick and Morty" <BR><strong>All rights reserved</strong></p>
+      <p class="carousel-caption" data-key="cap-rick">Escena renderizada de "Rick y Morty" <BR><strong>Todos los derechos reservados</strong></p>
     </div>
-<div class="carousel-slide">
-      <img src="img/920632d3-da64-4aac-8497-c200e5454de8_rw_1920.jpeg" alt="Modelo 3" class="carousel-image" />
-      <p class="carousel-caption">3D model character "El Alebrije"</p>
+
+    <div class="carousel-slide">
+      <img src="img/920632d3-da64-4aac-8497-c200e5454de8_rw_1920.jpeg" class="carousel-image" />
+      <p class="carousel-caption" data-key="cap-alebrije">Modelo 3D del personaje "El Alebrije"</p>
     </div>
-	  <div class="carousel-slide">
-      <img src="img/0349bc5d-6990-42a4-af96-bed0540f29cd_rw_1920.jpeg" alt="Modelo 3" class="carousel-image" />
-      <p class="carousel-caption">3D model character "El Alebrije"</p>
+    
+    <div class="carousel-slide">
+      <img src="img/0349bc5d-6990-42a4-af96-bed0540f29cd_rw_1920.jpeg" class="carousel-image" />
+      <p class="carousel-caption" data-key="cap-alebrije">Modelo 3D del personaje "El Alebrije"</p>
     </div>
-	    <div class="carousel-slide">
-      <img src="img/043a4b62-aa7a-4835-8a80-4650581aa848_rw_1920.jpg" alt="Modelo 3" class="carousel-image" />
-      <p class="carousel-caption">3D model Sunglasses</p>
+
+    <div class="carousel-slide">
+      <img src="img/043a4b62-aa7a-4835-8a80-4650581aa848_rw_1920.jpg" class="carousel-image" />
+      <p class="carousel-caption" data-key="cap-glasses">Modelo 3D de Gafas de sol</p>
     </div>
-	   <div class="carousel-slide">
-      <img src="img/6517ef49-8d42-4518-b43f-44a3a57de038_rw_1920.jpg" alt="Modelo 3" class="carousel-image" />
-      <p class="carousel-caption">3D model Sunglasses</p>
+
+    <div class="carousel-slide">
+      <img src="img/6517ef49-8d42-4518-b43f-44a3a57de038_rw_1920.jpg" class="carousel-image" />
+      <p class="carousel-caption" data-key="cap-glasses">Modelo 3D de Gafas de sol</p>
     </div>
-	    <div class="carousel-slide">
-      <img src="renderconjunto2.png" alt="Modelo 3" class="carousel-image" />
-      <p class="carousel-caption">Furniture set 3D Model. <br> Created for a project at UCM (Complutense University of Madrid).</p>
+
+    <div class="carousel-slide">
+      <img src="renderconjunto2.png" class="carousel-image" />
+      <p class="carousel-caption" data-key="cap-furniture">Modelo 3D de conjunto de muebles. <br> Creado para un proyecto en la UCM (Universidad Complutense de Madrid).</p>
     </div>
-	     <div class="carousel-slide">
-      <img src="rendermesa7png.png" alt="Modelo 3" class="carousel-image" />
-      <p class="carousel-caption">Furniture set 3D Model. <br> Created for a project at UCM (Complutense University of Madrid).</p>
+
+    <div class="carousel-slide">
+      <img src="rendermesa7png.png" class="carousel-image" />
+      <p class="carousel-caption" data-key="cap-furniture">Modelo 3D de conjunto de muebles. <br> Creado para un proyecto en la UCM (Universidad Complutense de Madrid).</p>
     </div>
-	    <div class="carousel-slide">
-      <img src="renderbanquito110g.png" alt="Modelo 3" class="carousel-image" />
-      <p class="carousel-caption">Furniture set 3D Model. <br> Created for a project at UCM (Complutense University of Madrid).</p>
+
+    <div class="carousel-slide">
+      <img src="renderbanquito110g.png" class="carousel-image" />
+      <p class="carousel-caption" data-key="cap-furniture">Modelo 3D de conjunto de muebles. <br> Creado para un proyecto en la UCM (Universidad Complutense de Madrid).</p>
     </div>
-    <!-- Puedes duplicar estos bloques .carousel-slide para agregar más imágenes -->
   </div>
 
   <script>
+    /* LÓGICA DEL CARRUSEL */
     let currentSlide = 0;
     const slides = document.querySelectorAll('.carousel-slide');
 
@@ -170,7 +198,47 @@
       currentSlide = (currentSlide + direction + slides.length) % slides.length;
       slides[currentSlide].classList.add('active');
     }
+
+    /* LÓGICA DE TRADUCCIÓN */
+    const textos = {
+      es: {
+        "main-title": "MODELADO 3D",
+        "cap-rick": "Escena renderizada de \"Rick y Morty\" <BR><strong>Todos los derechos reservados</strong>",
+        "cap-alebrije": "Modelo 3D del personaje \"El Alebrije\"",
+        "cap-glasses": "Modelo 3D de Gafas de sol",
+        "cap-furniture": "Modelo 3D de conjunto de muebles. <br> Creado para un proyecto en la UCM (Universidad Complutense de Madrid).",
+        "btn-lang": "EN"
+      },
+      en: {
+        "main-title": "3D MODELS",
+        "cap-rick": "Render scene of \"Rick and Morty\" <BR><strong>All rights reserved</strong>",
+        "cap-alebrije": "3D model character \"El Alebrije\"",
+        "cap-glasses": "3D model Sunglasses",
+        "cap-furniture": "Furniture set 3D Model. <br> Created for a project at UCM (Complutense University of Madrid).",
+        "btn-lang": "ES"
+      }
+    };
+
+    const btnIdioma = document.getElementById('btn-idioma');
+    let idiomaActual = localStorage.getItem('idiomaPreferido') || 'es';
+
+    function actualizarTextos() {
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const clave = el.getAttribute('data-key');
+        if (textos[idiomaActual][clave]) {
+          el.innerHTML = textos[idiomaActual][clave];
+        }
+      });
+      btnIdioma.textContent = textos[idiomaActual]["btn-lang"];
+      localStorage.setItem('idiomaPreferido', idiomaActual);
+    }
+
+    btnIdioma.addEventListener('click', () => {
+      idiomaActual = (idiomaActual === 'es') ? 'en' : 'es';
+      actualizarTextos();
+    });
+
+    actualizarTextos();
   </script>
 </body>
 </html>
-
